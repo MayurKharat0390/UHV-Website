@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section with 3D Elements -->
+<section class="relative overflow-hidden py-24 sm:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div
+            class="inline-flex items-center justify-center px-5 py-2 mb-8 glass rounded-full shadow-glass text-xs font-bold tracking-wide uppercase text-gray-700">
+            <span
+                class="w-2 h-2 rounded-full bg-gradient-to-r from-primary-400 to-purple-500 mr-2 animate-pulse"></span>
+            Academic Year {% now "Y" %}
+        </div>
+
+        <h1 class="text-6xl md:text-8xl font-serif font-bold tracking-tight leading-tight mb-8">
+            <span class="block gradient-text">Cultivating</span>
+            <span class="block text-gray-800">Harmony & Values</span>
+        </h1>
+
+        <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+            Bridge the gap between academic excellence and ethical living through self-exploration.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+            <a href="{% url 'reflections:daily_reflection' %}"
+                class="group relative px-10 py-5 bg-gradient-to-r from-primary-500 via-primary-600 to-purple-600 text-white rounded-full text-lg font-bold shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 overflow-hidden">
+                <span class="relative z-10 flex items-center">
+                    Begin Reflection
+                    <svg class="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </span>
+            </a>
+            <a href="#explore-values"
+                class="px-10 py-5 glass-strong text-gray-800 rounded-full text-lg font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+                Explore Core Values
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating 3D Cards -->
+    <div class="absolute top-20 right-10 hidden lg:block animate-float">
+        <div
+            class="glass-strong p-6 rounded-3xl shadow-lg transform rotate-12 hover:rotate-0 transition-transform duration-500">
+            <div
+                class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                ✓
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-32 left-10 hidden lg:block animate-float" style="animation-delay: 2s;">
+        <div
+            class="glass-strong p-6 rounded-3xl shadow-lg transform -rotate-12 hover:rotate-0 transition-transform duration-500">
+            <div
+                class="w-16 h-16 bg-gradient-to-br from-accent-400 to-accent-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                ★
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Mapping Section - Enhanced -->
+<section id="explore-values" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-20">
+            <h2 class="text-5xl font-serif font-bold mb-6">
+                <span class="gradient-text">Values in Action</span>
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto text-xl font-light">
+                Discover how universal values manifest across different dimensions of life.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+            {% for value in values %}
+            <div x-data="{ activeTab: 'Family' }"
+                class="group relative card-3d glass-strong rounded-[2.5rem] p-8 md:p-10 shadow-lg hover:shadow-2xl overflow-hidden">
+
+                <!-- Animated gradient background on hover -->
+                <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-[2.5rem]
+                    {% if forloop.counter == 1 %}from-primary-200 to-teal-200
+                    {% elif forloop.counter == 2 %}from-purple-200 to-purple-300
+                    {% elif forloop.counter == 3 %}from-coral-200 to-coral-300
+                    {% else %}from-lime-200 to-lime-300{% endif %}">
+                </div>
+
+                <div class="relative z-10">
+                    <!-- Header with Icon -->
+                    <div class="flex items-start justify-between mb-8">
+                        <div class="flex-1">
+                            <div class="inline-flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-lg transform group-hover:rotate-12 group-hover:scale-110 transition-all
+                                    {% if forloop.counter == 1 %}bg-gradient-to-br from-primary-400 to-teal-500
+                                    {% elif forloop.counter == 2 %}bg-gradient-to-br from-purple-400 to-purple-600
+                                    {% elif forloop.counter == 3 %}bg-gradient-to-br from-coral-400 to-coral-600
+                                    {% else %}bg-gradient-to-br from-lime-400 to-lime-600{% endif %}">
+                                    {% if forloop.counter == 1 %}🤝
+                                    {% elif forloop.counter == 2 %}🌟
+                                    {% elif forloop.counter == 3 %}💚
+                                    {% else %}🎯{% endif %}
+                                </div>
+                                <h3 class="text-3xl font-serif font-bold bg-gradient-to-r bg-clip-text text-transparent
+                                    {% if forloop.counter == 1 %}from-primary-600 to-teal-600
+                                    {% elif forloop.counter == 2 %}from-purple-600 to-purple-700
+                                    {% elif forloop.counter == 3 %}from-coral-500 to-coral-600
+                                    {% else %}from-lime-600 to-lime-700{% endif %}">
+                                    {{ value.name }}
+                                </h3>
+                            </div>
+                            <p class="text-gray-600 font-light text-lg leading-relaxed">{{ value.desc }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Tabs -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <template x-for="level in ['Family', 'College', 'Society', 'Profession']">
+                            <button @click="activeTab = level" :class="activeTab === level ? 
+                                    'text-white shadow-lg scale-105 {% if forloop.counter == 1 %}bg-gradient-to-r from-primary-500 to-teal-500{% elif forloop.counter == 2 %}bg-gradient-to-r from-purple-500 to-purple-600{% elif forloop.counter == 3 %}bg-gradient-to-r from-coral-400 to-coral-500{% else %}bg-gradient-to-r from-lime-500 to-lime-600{% endif %}' : 
+                                    'glass text-gray-700 hover:bg-white/70'"
+                                class="px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 whitespace-nowrap"
+                                x-text="level"></button>
+                        </template>
+                    </div>
+
+                    <!-- Content with smooth transitions -->
+                    <div class="min-h-[140px] flex items-center glass rounded-2xl p-6 border-2 transition-all duration-300
+                        {% if forloop.counter == 1 %}border-primary-200 group-hover:border-primary-300
+                        {% elif forloop.counter == 2 %}border-purple-200 group-hover:border-purple-300
+                        {% elif forloop.counter == 3 %}border-coral-200 group-hover:border-coral-300
+                        {% else %}border-lime-200 group-hover:border-lime-300{% endif %}">
+                        {% for level, example in value.examples.items %}
+                        <div x-show="activeTab === '{{ level }}'" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 translate-y-4"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            class="text-xl text-gray-800 leading-relaxed font-medium">
+                            <div class="flex items-start gap-3">
+                                <span class="inline-block w-2 h-2 rounded-full mt-2 flex-shrink-0
+                                    {% if forloop.parentloop.counter == 1 %}bg-gradient-to-r from-primary-400 to-teal-500
+                                    {% elif forloop.parentloop.counter == 2 %}bg-gradient-to-r from-purple-400 to-purple-600
+                                    {% elif forloop.parentloop.counter == 3 %}bg-gradient-to-r from-coral-400 to-coral-500
+                                    {% else %}bg-gradient-to-r from-lime-400 to-lime-600{% endif %}">
+                                </span>
+                                <span>{{ example }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action with 3D Cards -->
+<section class="py-24 relative">
+    <div class="max-w-6xl mx-auto px-4 text-center relative z-10">
+        <h2 class="text-5xl md:text-6xl font-serif font-bold mb-8">
+            <span class="gradient-text">Join the Movement</span>
+        </h2>
+        <p class="text-2xl text-gray-600 mb-16 max-w-3xl mx-auto font-light">
+            Small acts of responsibility create ripples of harmony in the world.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <a href="{% url 'voices:list' %}"
+                class="group card-3d glass-strong p-8 rounded-3xl shadow-lg hover:shadow-2xl text-center">
+                <div
+                    class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-coral-400 to-coral-600 rounded-2xl flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Student Voices</h3>
+                <p class="text-gray-600">Read inspiring reflections</p>
+            </a>
+
+            <a href="{% url 'activities:list' %}"
+                class="group card-3d glass-strong p-8 rounded-3xl shadow-lg hover:shadow-2xl text-center">
+                <div
+                    class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-lime-400 to-lime-600 rounded-2xl flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-transform">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Our Activities</h3>
+                <p class="text-gray-600">See values in action</p>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

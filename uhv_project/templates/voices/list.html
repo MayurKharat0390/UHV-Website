@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center mb-20">
+        <h1 class="text-6xl font-serif font-bold mb-6">
+            <span class="gradient-text">Student Voices</span>
+        </h1>
+        <p class="text-2xl text-gray-600 font-light max-w-3xl mx-auto">
+            Honest reflections from our community on living values daily.
+        </p>
+    </div>
+
+    <!-- Submission Form -->
+    <div class="max-w-3xl mx-auto mb-24">
+        <div class="glass-strong rounded-[2.5rem] p-10 md:p-12 shadow-3d relative overflow-hidden group">
+            <div
+                class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600 animate-gradient bg-300%">
+            </div>
+
+            <h3
+                class="text-3xl font-serif font-bold mb-8 bg-gradient-to-r from-rose-500 to-rose-600 bg-clip-text text-transparent">
+                Share Your Experience
+            </h3>
+
+            <form method="post" action="{% url 'voices:list' %}" class="relative z-10 space-y-6">
+                {% csrf_token %}
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wide">Display
+                        Name</label>
+                    {{ form.name_display }}
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wide">Your
+                        Reflection</label>
+                    {{ form.content }}
+                </div>
+                <div class="flex items-center justify-between pt-4">
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                        </svg>
+                        <span>Moderated before posting</span>
+                    </div>
+                    <button type="submit"
+                        class="px-8 py-4 bg-gradient-to-r from-rose-500 to-rose-600 text-white rounded-full font-bold shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all">
+                        Submit Reflection
+                    </button>
+                </div>
+            </form>
+
+            <!-- Decorative element -->
+            <div
+                class="absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-br from-rose-200 to-rose-300 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-700">
+            </div>
+        </div>
+    </div>
+
+    <!-- Voices Masonry Grid -->
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+        {% for voice in voices %}
+        <div
+            class="break-inside-avoid card-3d glass-strong p-8 rounded-3xl shadow-glass hover:shadow-3d relative group overflow-hidden">
+            <!-- Gradient accent -->
+            <div
+                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 via-purple-500 to-accent-400">
+            </div>
+
+            <!-- Quote Icon -->
+            <div
+                class="absolute -top-2 -left-2 w-16 h-16 bg-gradient-to-br from-rose-200 to-rose-300 rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity">
+            </div>
+            <svg class="relative w-10 h-10 text-rose-300 mb-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9C9.55228 16 10 15.5523 10 15V9C10 8.44772 9.55228 8 9 8H5C4.44772 8 4 8.44772 4 9V15C4 16.6569 5.34315 18 7 18H9.983L9.983 21H14.017Z">
+                </path>
+            </svg>
+
+            <div class="relative z-10">
+                <p class="text-gray-700 leading-relaxed text-lg mb-8 italic font-light">
+                    "{{ voice.content }}"
+                </p>
+
+                <div class="flex items-center pt-6 border-t border-white/50">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent-400 to-accent-600 flex items-center justify-center text-white font-bold text-lg shadow-lg mr-4">
+                        {{ voice.name_display|slice:":1"|upper }}
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-800">{{ voice.name_display }}</p>
+                        <p class="text-xs text-gray-500">{{ voice.created_at|date:"M j, Y" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full py-20 text-center glass-strong rounded-3xl shadow-glass">
+            <div
+                class="inline-block p-6 rounded-3xl bg-gradient-to-br from-rose-100 to-rose-200 mb-6 animate-pulse-slow">
+                <svg class="w-12 h-12 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                    </path>
+                </svg>
+            </div>
+            <p class="text-xl text-gray-600 font-serif">Be the first to share your voice.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        border-radius: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        font-family: 'Outfit', sans-serif;
+        transition: all 0.3s;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+        outline: none;
+        border-color: rgba(244, 63, 94, 0.5);
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.1);
+    }
+</style>
+{% endblock %}

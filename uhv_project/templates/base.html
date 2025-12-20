@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Universal Human Values{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#0ea5e9', // Sky Blue
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            DEFAULT: '#f97316', // Orange
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        },
+                        purple: {
+                            DEFAULT: '#7c3aed',
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#7c3aed',
+                        },
+                        teal: {
+                            DEFAULT: '#14b8a6',
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        },
+                        coral: {
+                            DEFAULT: '#ff6b6b',
+                            50: '#fff5f5',
+                            100: '#ffe3e3',
+                            200: '#ffc9c9',
+                            300: '#ffa8a8',
+                            400: '#ff8787',
+                            500: '#ff6b6b',
+                            600: '#fa5252',
+                        },
+                        lime: {
+                            DEFAULT: '#84cc16',
+                            50: '#f7fee7',
+                            100: '#ecfccb',
+                            200: '#d9f99d',
+                            300: '#bef264',
+                            400: '#a3e635',
+                            500: '#84cc16',
+                            600: '#65a30d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+                        'glow-primary': '0 0 20px rgba(16, 185, 129, 0.4)',
+                        'glow-accent': '0 0 20px rgba(245, 158, 11, 0.4)',
+                        '3d': '0 20px 60px -15px rgba(0, 0, 0, 0.3)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 8s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        }
+                    },
+                    backgroundSize: {
+                        '300%': '300%',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+            color: #1a202c;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            z-index: -1;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glassmorphism - Optimized */
+        .glass {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 3D Card Effect - Simplified */
+        .card-3d {
+            transition: transform 0.3s ease;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Animated Gradient Text */
+        .gradient-text {
+            background: linear-gradient(90deg, #0ea5e9, #7c3aed, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #0ea5e9, #7c3aed);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #059669, #7c3aed);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Shimmer Effect */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Smooth transitions - Optimized */
+        a,
+        button {
+            transition: all 0.2s ease;
+        }
+
+        .page-transition {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col min-h-screen selection:bg-primary-200 selection:text-primary-900">
+
+    <!-- Floating Background Elements - Optimized -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div
+            class="absolute top-20 left-10 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-float">
+        </div>
+        <div class="absolute bottom-20 right-20 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-float"
+            style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-500" x-data="{ scrolled: false }"
+        @scroll.window="scrolled = (window.pageYOffset > 20)"
+        :class="scrolled ? 'glass-strong shadow-glass py-3' : 'glass py-5'">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="{% url 'core:home' %}" class="flex items-center space-x-3 group">
+                    <div class="relative">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-primary-400 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity">
+                        </div>
+                        <div
+                            class="relative w-12 h-12 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center font-serif font-bold text-2xl text-white shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all">
+                            U
+                        </div>
+                    </div>
+                    <div>
+                        <span
+                            class="block text-lg font-serif font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent leading-none">UHV</span>
+                        <span
+                            class="block text-[10px] font-bold text-gray-500 tracking-widest uppercase">Department</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-2 glass px-3 py-2 rounded-full shadow-glass">
+                    {% with request.resolver_match.view_name as view_name %}
+                    <a href="{% url 'core:home' %}"
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:home' %}bg-gradient-to-r from-primary-500 to-teal-500 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Home</a>
+                    <a href="{% url 'reflections:daily_reflection' %}"
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'reflections' in view_name %}bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Reflection</a>
+                    <a href="{% url 'resources:list' %}"
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'resources' in view_name %}bg-gradient-to-r from-accent-500 to-accent-600 text-white{% else %}text-gray-700 hover:bg-white/50{% endif %}">Resources</a>
+                    <a href="{% url 'activities:list' %}"
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'activities' in view_name %}bg-gradient-to-r from-lime-500 to-lime-600 text-white shadow-glow-accent{% else %}text-gray-700 hover:bg-white/50{% endif %}">Activities</a>
+                    <a href="{% url 'voices:list' %}"
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'voices' in view_name %}bg-gradient-to-r from-coral-400 to-coral-500 text-white{% else %}text-gray-700 hover:bg-white/50{% endif %}">Voices</a>
+                    {% endwith %}
+                </div>
+
+                <!-- Auth/Profile -->
+                <div class="hidden md:flex items-center space-x-3">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'users:profile' %}"
+                        class="text-base font-semibold text-gray-700 hover:text-primary-600 transition-colors flex items-center gap-2 glass px-5 py-3 rounded-full">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Profile</span>
+                    </a>
+
+
+                    <form method="post" action="{% url 'users:logout' %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-gray-800 transition-colors px-5 py-3 glass rounded-full">Logout</button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'users:login' %}"
+                        class="text-base font-semibold text-gray-700 hover:text-primary-600 transition-colors px-5 py-3 glass rounded-full">Log
+                        in</a>
+                    <a href="{% url 'users:signup' %}"
+                        class="bg-gradient-to-r from-teal-500 to-primary-600 text-white px-8 py-3.5 rounded-full text-base font-bold shadow-glow-primary hover:shadow-lg transition-all hover:-translate-y-0.5">Sign
+                        up</a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button @click="$dispatch('toggle-mobile-menu')"
+                        class="p-2 text-gray-700 hover:text-primary-600 glass rounded-xl">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div x-data="{ open: false }" @toggle-mobile-menu.window="open = !open" x-show="open"
+        class="fixed inset-0 z-50 md:hidden" style="display: none;">
+        <div class="absolute inset-0 bg-black/30 backdrop-blur-sm" @click="open = false" x-transition.opacity></div>
+        <div class="absolute right-0 top-0 h-full w-72 glass-strong shadow-2xl p-6 flex flex-col space-y-6"
+            x-transition:enter="transform transition ease-out duration-300" x-transition:enter-start="translate-x-full"
+            x-transition:enter-end="translate-x-0">
+            <button @click="open = false" class="self-end text-gray-500 hover:text-gray-900">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+            <a href="{% url 'core:home' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">Home</a>
+            <a href="{% url 'reflections:daily_reflection' %}"
+                class="text-xl font-bold text-gray-800 hover:text-purple-600">Reflection</a>
+            <a href="{% url 'resources:list' %}"
+                class="text-xl font-bold text-gray-800 hover:text-accent-600">Resources</a>
+            <a href="{% url 'activities:list' %}"
+                class="text-xl font-bold text-gray-800 hover:text-lime-600">Activities</a>
+            <a href="{% url 'voices:list' %}" class="text-xl font-bold text-gray-800 hover:text-coral-500">Voices</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'users:profile' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">My
+                Profile</a>
+            {% else %}
+            <a href="{% url 'users:login' %}" class="text-xl font-bold text-primary-600">Log in</a>
+            <a href="{% url 'users:signup' %}"
+                class="bg-gradient-to-r from-primary-500 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-center text-lg">Sign
+                up</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-28 page-transition relative z-10">
+        {% if messages %}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+            {% for message in messages %}
+            <div class="glass-strong border border-primary-200 text-primary-900 px-5 py-4 rounded-2xl shadow-glass flex items-center"
+                role="alert">
+                <svg class="w-5 h-5 mr-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">{{ message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-strong border-t border-white/30 mt-20 relative overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center font-serif font-bold text-xl text-white shadow-lg">
+                            U</div>
+                        <span class="font-serif font-bold text-2xl gradient-text">UHV Dept.</span>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        Fostering harmony through self-exploration and ethical living.
+                    </p>
+                </div>
+                <div>
+                    <h4
+                        class="font-serif font-bold text-xl mb-6 bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
+                        Quick Links</h4>
+                    <ul class="space-y-3 text-gray-600 font-medium text-base">
+                        <li><a href="{% url 'core:home' %}" class="hover:text-primary-600 transition-colors">Home</a>
+                        </li>
+                        <li><a href="{% url 'reflections:daily_reflection' %}"
+                                class="hover:text-purple-600 transition-colors">Daily Reflection</a></li>
+                        <li><a href="{% url 'journals:list' %}" class="hover:text-accent-600 transition-colors">Digital
+                                Journal</a></li>
+                        <li><a href="{% url 'faculty:list' %}" class="hover:text-primary-600 transition-colors">Our
+                                Mentors</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4
+                        class="font-serif font-bold text-xl mb-6 bg-gradient-to-r from-accent-500 to-rose-500 bg-clip-text text-transparent">
+                        Philosophy</h4>
+                    <p class="text-gray-600 leading-relaxed italic mb-4 text-base">
+                        "Education is the realization of one's potential and contribution to universal well-being."
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-white/30 mt-12 pt-8 text-center text-base text-gray-500">
+                &copy; {% now "Y" %} Universal Human Values Department. Built with care for holistic education.
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>
