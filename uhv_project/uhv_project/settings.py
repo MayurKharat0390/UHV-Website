@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'quotes',
     'resources',
     'progress',
+    'innovations',
 ]
 
 MIDDLEWARE = [
@@ -220,7 +221,7 @@ JAZZMIN_SETTINGS = {
     "hide_models": [],
     
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["users", "reflections", "journals", "activities", "voices", "resources", "progress"],
+    "order_with_respect_to": ["users", "reflections", "journals", "activities", "voices", "innovations", "resources", "progress"],
     
     # Custom icons for side menu apps/models
     "icons": {
@@ -235,6 +236,7 @@ JAZZMIN_SETTINGS = {
         "quotes.Quote": "fas fa-quote-left",
         "progress.UserProgress": "fas fa-chart-line",
         "progress.ReflectionStreak": "fas fa-fire",
+        "innovations.Innovation": "fas fa-lightbulb",
     },
     
     # Icons that are used when one is not manually specified
@@ -313,7 +315,7 @@ JAZZMIN_UI_TWEAKS = {
 # Production Security Settings
 if not DEBUG:
     # HTTPS/SSL Settings
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=True, cast=bool)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True

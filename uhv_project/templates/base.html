@@ -303,6 +303,8 @@
                         class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'activities' in view_name %}bg-gradient-to-r from-lime-500 to-lime-600 text-white shadow-glow-accent{% else %}text-gray-700 hover:bg-white/50{% endif %}">Activities</a>
                     <a href="{% url 'voices:list' %}"
                         class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'voices' in view_name %}bg-gradient-to-r from-coral-400 to-coral-500 text-white{% else %}text-gray-700 hover:bg-white/50{% endif %}">Voices</a>
+                    <a href="{% url 'innovations:list' %}"
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'innovations' in view_name %}bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Innovations</a>
                     {% endwith %}
                 </div>
 
@@ -369,6 +371,8 @@
             <a href="{% url 'activities:list' %}"
                 class="text-xl font-bold text-gray-800 hover:text-lime-600">Activities</a>
             <a href="{% url 'voices:list' %}" class="text-xl font-bold text-gray-800 hover:text-coral-500">Voices</a>
+            <a href="{% url 'innovations:list' %}"
+                class="text-xl font-bold text-gray-800 hover:text-primary-600">Innovations</a>
             {% if user.is_authenticated %}
             <a href="{% url 'users:profile' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">My
                 Profile</a>

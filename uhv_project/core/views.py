@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from innovations.models import Innovation
 
 def home(request):
+    featured_innovations = Innovation.objects.filter(is_featured=True)[:3]
     values = [
         {
             'name': 'Responsibility',
@@ -43,4 +45,7 @@ def home(request):
             }
         }
     ]
-    return render(request, 'core/home.html', {'values': values})
+    return render(request, 'core/home.html', {
+        'values': values,
+        'featured_innovations': featured_innovations
+    })

@@ -153,6 +153,77 @@
     </div>
 </section>
 
+<!-- UHV Innovations Section -->
+{% if featured_innovations %}
+<section class="py-24 relative overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-pulse-slow">
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div class="max-w-2xl">
+                <div
+                    class="inline-flex items-center px-4 py-1.5 mb-6 glass rounded-full text-xs font-bold tracking-widest uppercase text-purple-600">
+                    Student Projects & Research
+                </div>
+                <h2 class="text-5xl font-serif font-bold mb-6">
+                    Digital <span class="gradient-text">UHV Initiatives</span>
+                </h2>
+                <p class="text-xl text-gray-600 font-light">
+                    Witness how our students and faculty are leveraging technology to propagate human values and social
+                    harmony.
+                </p>
+            </div>
+            <a href="{% url 'innovations:list' %}"
+                class="group flex items-center gap-3 px-8 py-4 glass-strong rounded-2xl font-bold hover:shadow-xl transition-all">
+                View All Projects
+                <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
+                    </path>
+                </svg>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for project in featured_innovations %}
+            <div
+                class="group card-3d glass-strong rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl flex flex-col">
+                <div class="relative h-48 overflow-hidden">
+                    <div
+                        class="w-full h-full bg-gradient-to-br {% if project.innovation_type == 'app' %}from-primary-400 to-teal-400{% elif project.innovation_type == 'website' %}from-purple-400 to-purple-500{% else %}from-accent-400 to-rose-400{% endif %} flex items-center justify-center p-6">
+                        <div class="text-white text-center">
+                            <div class="text-5xl group-hover:scale-110 transition-transform duration-500">
+                                {% if project.innovation_type == 'app' %}📱{% elif project.innovation_type == 'website'
+                                %}🌐{% else %}🛠️{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ project.title }}</h3>
+                    <p class="text-gray-600 text-sm mb-6 line-clamp-2">{{ project.short_description }}</p>
+                    <a href="{{ project.link }}" target="_blank"
+                        class="text-primary-600 font-bold text-sm flex items-center group/link">
+                        Learn More
+                        <svg class="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <!-- Call to Action with 3D Cards -->
 <section class="py-24 relative">
     <div class="max-w-6xl mx-auto px-4 text-center relative z-10">
