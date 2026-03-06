@@ -2,21 +2,25 @@
     "version": 2,
     "builds": [
         {
+            "src": "uhv_project/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.10.x"
+            }
+        },
+        {
             "src": "build_files.sh",
             "use": "@vercel/static-build",
             "config": {
                 "distDir": "staticfiles"
             }
-        },
-        {
-            "src": "uhv_project/wsgi.py",
-            "use": "@vercel/python"
         }
     ],
     "routes": [
         {
             "src": "/static/(.*)",
-            "dest": "/$1"
+            "dest": "/static/$1"
         },
         {
             "src": "/(.*)",
