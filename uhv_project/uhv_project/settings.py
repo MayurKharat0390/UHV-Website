@@ -14,8 +14,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-uhv-academic-platform
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.railway.app', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.railway.app,.vercel.app', cast=Csv())
 
 
 # Application definition
@@ -73,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'quotes.context_processors.daily_quote',
+                'core.context_processors.news_ticker',
             ],
         },
     },

@@ -60,3 +60,6 @@ htmlcov/
 # Backup files
 *.bak
 *.tmp
+
+# Vercel
+.vercel/

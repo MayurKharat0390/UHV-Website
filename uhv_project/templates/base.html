@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -29,28 +30,28 @@
                 extend: {
                     colors: {
                         primary: {
-                            DEFAULT: '#0ea5e9', // Sky Blue
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                            DEFAULT: '#002d5a', // Navy Blue
+                            50: '#e6ebef',
+                            100: '#ccd7df',
+                            200: '#99afbf',
+                            300: '#66879f',
+                            400: '#335f7f',
+                            500: '#003366',
+                            600: '#002d5a',
+                            700: '#002144',
+                            800: '#00162d',
+                            900: '#000b17',
                         },
                         accent: {
-                            DEFAULT: '#f97316', // Orange
-                            50: '#fff7ed',
-                            100: '#ffedd5',
-                            200: '#fed7aa',
-                            300: '#fdba74',
-                            400: '#fb923c',
-                            500: '#f97316',
-                            600: '#ea580c',
-                            700: '#c2410c',
+                            DEFAULT: '#ffcc00', // Institutional Yellow
+                            50: '#fffdf0',
+                            100: '#fff9cc',
+                            200: '#fff399',
+                            300: '#ffed66',
+                            400: '#ffe733',
+                            500: '#ffcc00',
+                            600: '#e6b800',
+                            700: '#b38f00',
                         },
                         purple: {
                             DEFAULT: '#7c3aed',
@@ -130,7 +131,7 @@
             font-family: 'Outfit', sans-serif;
             font-size: 18px;
             line-height: 1.7;
-            background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+            background: linear-gradient(135deg, #002d5a 0%, #004b8d 100%);
             color: #1a202c;
             position: relative;
         }
@@ -178,10 +179,39 @@
 
         /* Animated Gradient Text */
         .gradient-text {
-            background: linear-gradient(90deg, #0ea5e9, #7c3aed, #f97316);
+            background: linear-gradient(90deg, #002d5a, #ffcc00, #004b8d);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: textGradient 5s linear infinite;
+        }
+
+        @keyframes textGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Custom Scrollbar */
@@ -194,12 +224,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #0ea5e9, #7c3aed);
+            background: linear-gradient(180deg, #002d5a, #ffcc00);
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #059669, #7c3aed);
+            background: linear-gradient(180deg, #001f3f, #e6b800);
         }
 
         /* Floating Animation */
@@ -251,6 +281,27 @@
                 opacity: 1;
             }
         }
+
+        /* News Ticker Animation */
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+        }
+
+        .animate-ticker:hover {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 
@@ -259,32 +310,79 @@
     <!-- Floating Background Elements - Optimized -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div
-            class="absolute top-20 left-10 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-float">
+            class="absolute top-20 left-10 w-72 h-72 bg-accent-200 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-float">
         </div>
-        <div class="absolute bottom-20 right-20 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-float"
+        <div class="absolute bottom-20 right-20 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-float"
             style="animation-delay: 3s;"></div>
     </div>
 
+    <!-- Institutional Header -->
+    <header class="bg-white border-b border-gray-100 py-4 shadow-sm relative z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6">
+                <!-- Left Logos -->
+                <div class="flex items-center space-x-6">
+                    <img src="{% static 'images/pccoe_logo.png' %}" alt="PCCOE Logo"
+                        class="h-20 md:h-28 w-auto hover:scale-105 transition-transform duration-300">
+                    <img src="{% static 'images/ai_year_logo.png' %}" alt="AI Year Logo"
+                        class="h-16 md:h-20 w-auto hover:scale-105 transition-transform duration-300">
+                </div>
+
+                <!-- Center Text Content -->
+                <div class="flex flex-col items-center justify-center flex-grow text-center px-4">
+                    <h2
+                        class="text-primary-600 font-bold text-sm md:text-base tracking-[0.2em] uppercase leading-tight mb-1">
+                        Pimpri Chinchwad Education Trust's
+                    </h2>
+                    <h1
+                        class="text-gray-900 font-extrabold text-xl md:text-3xl tracking-tight uppercase mb-2 font-serif">
+                        Pimpri Chinchwad College of Engineering
+                    </h1>
+                    <div
+                        class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-[10px] md:text-xs text-gray-500 font-medium">
+                        <span class="whitespace-nowrap">NBA Accredited</span>
+                        <span class="hidden md:inline text-gray-300">|</span>
+                        <span class="whitespace-nowrap">NAAC Accredited with 'A' Grade</span>
+                        <span class="hidden md:inline text-gray-300">|</span>
+                        <span class="whitespace-nowrap">An Autonomous Institute</span>
+                        <span class="hidden md:inline text-gray-300">|</span>
+                        <span class="whitespace-nowrap">AICTE Approved</span>
+                    </div>
+                    <p class="text-[10px] md:text-xs text-gray-500 mt-1">
+                        ISO 21001:2018 Certified | Permanently Affiliated to <span
+                            class="text-primary-600 font-bold">SPPU, Pune</span>
+                    </p>
+                </div>
+
+                <!-- Right Logo -->
+                <div class="flex items-center">
+                    <img src="{% static 'images/pccoe_trust_logo.png' %}" alt="Trust Logo"
+                        class="h-20 md:h-28 w-auto hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 transition-all duration-500" x-data="{ scrolled: false }"
+    <nav class="sticky top-0 w-full z-50 transition-all duration-500" x-data="{ scrolled: false }"
         @scroll.window="scrolled = (window.pageYOffset > 20)"
-        :class="scrolled ? 'glass-strong shadow-glass py-3' : 'glass py-5'">
+        :class="scrolled ? 'glass-strong shadow-glass py-2' : 'glass py-3'">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
                 <a href="{% url 'core:home' %}" class="flex items-center space-x-3 group">
                     <div class="relative">
                         <div
-                            class="absolute inset-0 bg-gradient-to-r from-primary-400 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-r from-accent-400 to-primary-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity">
                         </div>
                         <div
-                            class="relative w-12 h-12 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center font-serif font-bold text-2xl text-white shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all">
+                            class="relative w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl flex items-center justify-center font-serif font-bold text-2xl text-accent-400 shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all">
                             U
                         </div>
                     </div>
                     <div>
                         <span
-                            class="block text-lg font-serif font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent leading-none">UHV</span>
+                            class="block text-lg font-serif font-bold bg-gradient-to-r from-primary-600 to-primary-900 bg-clip-text text-transparent leading-none">UHV</span>
                         <span
                             class="block text-[10px] font-bold text-gray-500 tracking-widest uppercase">Department</span>
                     </div>
@@ -294,17 +392,19 @@
                 <div class="hidden md:flex items-center space-x-2 glass px-3 py-2 rounded-full shadow-glass">
                     {% with request.resolver_match.view_name as view_name %}
                     <a href="{% url 'core:home' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:home' %}bg-gradient-to-r from-primary-500 to-teal-500 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Home</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:home' %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Home</a>
                     <a href="{% url 'reflections:daily_reflection' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'reflections' in view_name %}bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Reflection</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'reflections' in view_name %}bg-gradient-to-r from-primary-700 to-primary-800 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Reflection</a>
                     <a href="{% url 'resources:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'resources' in view_name %}bg-gradient-to-r from-accent-500 to-accent-600 text-white{% else %}text-gray-700 hover:bg-white/50{% endif %}">Resources</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'resources' in view_name %}bg-gradient-to-r from-accent-500 to-accent-600 text-primary-900{% else %}text-gray-700 hover:bg-white/50{% endif %}">Resources</a>
                     <a href="{% url 'activities:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'activities' in view_name %}bg-gradient-to-r from-lime-500 to-lime-600 text-white shadow-glow-accent{% else %}text-gray-700 hover:bg-white/50{% endif %}">Activities</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'activities' in view_name %}bg-gradient-to-r from-primary-600 to-primary-800 text-white shadow-glow-accent{% else %}text-gray-700 hover:bg-white/50{% endif %}">Activities</a>
                     <a href="{% url 'voices:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'voices' in view_name %}bg-gradient-to-r from-coral-400 to-coral-500 text-white{% else %}text-gray-700 hover:bg-white/50{% endif %}">Voices</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'voices' in view_name %}bg-gradient-to-r from-accent-400 to-accent-500 text-primary-900{% else %}text-gray-700 hover:bg-white/50{% endif %}">Voices</a>
                     <a href="{% url 'innovations:list' %}"
                         class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'innovations' in view_name %}bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:bg-white/50{% endif %}">Innovations</a>
+                    <a href="/#our-team"
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'faculty' in view_name %}bg-gradient-to-r from-accent-500 to-accent-600 text-primary-900 shadow-glow-accent{% else %}text-gray-700 hover:bg-white/50{% endif %}">Mentors</a>
                     {% endwith %}
                 </div>
 
@@ -331,7 +431,7 @@
                         class="text-base font-semibold text-gray-700 hover:text-primary-600 transition-colors px-5 py-3 glass rounded-full">Log
                         in</a>
                     <a href="{% url 'users:signup' %}"
-                        class="bg-gradient-to-r from-teal-500 to-primary-600 text-white px-8 py-3.5 rounded-full text-base font-bold shadow-glow-primary hover:shadow-lg transition-all hover:-translate-y-0.5">Sign
+                        class="bg-gradient-to-r from-accent-400 to-accent-600 text-primary-900 px-8 py-3.5 rounded-full text-base font-bold shadow-glow-primary hover:shadow-lg transition-all hover:-translate-y-0.5">Sign
                         up</a>
                     {% endif %}
                 </div>
@@ -365,28 +465,101 @@
             </button>
             <a href="{% url 'core:home' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">Home</a>
             <a href="{% url 'reflections:daily_reflection' %}"
-                class="text-xl font-bold text-gray-800 hover:text-purple-600">Reflection</a>
+                class="text-xl font-bold text-gray-800 hover:text-primary-600">Reflection</a>
             <a href="{% url 'resources:list' %}"
                 class="text-xl font-bold text-gray-800 hover:text-accent-600">Resources</a>
             <a href="{% url 'activities:list' %}"
-                class="text-xl font-bold text-gray-800 hover:text-lime-600">Activities</a>
-            <a href="{% url 'voices:list' %}" class="text-xl font-bold text-gray-800 hover:text-coral-500">Voices</a>
+                class="text-xl font-bold text-gray-800 hover:text-primary-700">Activities</a>
+            <a href="{% url 'voices:list' %}" class="text-xl font-bold text-gray-800 hover:text-accent-500">Voices</a>
             <a href="{% url 'innovations:list' %}"
                 class="text-xl font-bold text-gray-800 hover:text-primary-600">Innovations</a>
+            <a href="/#our-team" class="text-xl font-bold text-gray-800 hover:text-accent-500">Mentors</a>
             {% if user.is_authenticated %}
             <a href="{% url 'users:profile' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">My
                 Profile</a>
             {% else %}
             <a href="{% url 'users:login' %}" class="text-xl font-bold text-primary-600">Log in</a>
             <a href="{% url 'users:signup' %}"
-                class="bg-gradient-to-r from-primary-500 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-center text-lg">Sign
+                class="bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-full font-bold text-center text-lg">Sign
                 up</a>
             {% endif %}
         </div>
     </div>
 
+    <!-- News Ticker (Moving Line) -->
+    <div class="sticky top-[72px] md:top-[88px] z-40 bg-gradient-to-r from-primary-900 to-primary-700 text-white border-y border-accent-500/20 shadow-lg overflow-hidden py-2"
+        x-data="{ scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 50)"
+        :class="scrolled ? 'opacity-90 blur-[1px] hover:opacity-100 hover:blur-none transition-all duration-300' : ''">
+        <div class="relative flex items-center px-4">
+            <div
+                class="flex-shrink-0 bg-accent-500 text-primary-900 text-[10px] font-extrabold uppercase tracking-widest px-4 py-1.5 z-10 shadow-xl flex items-center gap-2 rounded-lg">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-900 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-900"></span>
+                </span>
+                Updates
+            </div>
+            <div class="flex-grow overflow-hidden whitespace-nowrap mask-linear-fade flex items-center relative h-8">
+                <div class="animate-ticker inline-flex items-center space-x-12 px-12 absolute left-0 text-accent-100">
+                    {% for update in ticker_updates %}
+                    <span class="text-sm font-semibold tracking-wide flex items-center gap-2">
+                        {% if update.icon_type == 'update' %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2L6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+                        </svg>
+                        {% elif update.icon_type == 'event' %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path
+                                d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
+                        </svg>
+                        {% elif update.icon_type == 'voice' %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+                        </svg>
+                        {% else %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                        {% endif %}
+                        {{ update.text }}
+                    </span>
+                    {% endfor %}
+                    <!-- Duplicate for seamless looping -->
+                    {% for update in ticker_updates %}
+                    <span class="text-sm font-semibold tracking-wide flex items-center gap-2">
+                        {% if update.icon_type == 'update' %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2L6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+                        </svg>
+                        {% elif update.icon_type == 'event' %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path
+                                d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
+                        </svg>
+                        {% elif update.icon_type == 'voice' %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+                        </svg>
+                        {% else %}
+                        <svg class="w-4 h-4 fill-accent-400" viewBox="0 0 24 24">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                        {% endif %}
+                        {{ update.text }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
-    <main class="flex-grow pt-28 page-transition relative z-10">
+    <main class="flex-grow pt-4 page-transition relative z-10">
         {% if messages %}
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
             {% for message in messages %}
@@ -411,7 +584,7 @@
                 <div>
                     <div class="flex items-center space-x-3 mb-6">
                         <div
-                            class="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center font-serif font-bold text-xl text-white shadow-lg">
+                            class="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl flex items-center justify-center font-serif font-bold text-xl text-white shadow-lg">
                             U</div>
                         <span class="font-serif font-bold text-2xl gradient-text">UHV Dept.</span>
                     </div>
@@ -421,13 +594,13 @@
                 </div>
                 <div>
                     <h4
-                        class="font-serif font-bold text-xl mb-6 bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
+                        class="font-serif font-bold text-xl mb-6 bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
                         Quick Links</h4>
                     <ul class="space-y-3 text-gray-600 font-medium text-base">
                         <li><a href="{% url 'core:home' %}" class="hover:text-primary-600 transition-colors">Home</a>
                         </li>
                         <li><a href="{% url 'reflections:daily_reflection' %}"
-                                class="hover:text-purple-600 transition-colors">Daily Reflection</a></li>
+                                class="hover:text-primary-700 transition-colors">Daily Reflection</a></li>
                         <li><a href="{% url 'journals:list' %}" class="hover:text-accent-600 transition-colors">Digital
                                 Journal</a></li>
                         <li><a href="{% url 'faculty:list' %}" class="hover:text-primary-600 transition-colors">Our
@@ -436,7 +609,7 @@
                 </div>
                 <div>
                     <h4
-                        class="font-serif font-bold text-xl mb-6 bg-gradient-to-r from-accent-500 to-rose-500 bg-clip-text text-transparent">
+                        class="font-serif font-bold text-xl mb-6 bg-gradient-to-r from-accent-500 to-accent-700 bg-clip-text text-transparent">
                         Philosophy</h4>
                     <p class="text-gray-600 leading-relaxed italic mb-4 text-base">
                         "Education is the realization of one's potential and contribution to universal well-being."

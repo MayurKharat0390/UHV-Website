@@ -114,7 +114,30 @@ python manage.py createsuperuser
 
 ---
 
-### 7. **FACULTY PROFILES** 👨‍🏫
+### 7. **CORE VALUE CARDS** 🤝
+**Location:** Admin → Core → Core Values
+
+**Features:**
+- ✅ Manage the "Explore Values" section on the home page
+- ✅ Edit card titles, descriptions, and icons (emojis)
+- ✅ Add detailed examples for Family, College, Society, and Profession
+- ✅ Control the display order of cards
+
+---
+
+### 8. **NEWS TICKER & UPDATES** 📣
+**Location:** Admin → Core → News Updates
+
+**Features:**
+- ✅ Add new items to the moving line below the navbar
+- ✅ Select icons (Update, Event, Voice, etc.)
+- ✅ Set active/inactive status to hide old updates
+- ✅ Control scroll order
+- ✅ Link updates to specific pages (Optional)
+
+---
+
+### 9. **FACULTY PROFILES** 👨‍🏫
 **Location:** Admin → Faculty → Faculty Profiles
 
 **Features:**
@@ -126,7 +149,7 @@ python manage.py createsuperuser
 
 ---
 
-### 8. **RESOURCES LIBRARY** 📚
+### 10. **RESOURCES LIBRARY** 📚
 **Location:** Admin → Resources → Resources
 
 **Features:**
