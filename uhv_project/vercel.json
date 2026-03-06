@@ -2,17 +2,18 @@
     "version": 2,
     "builds": [
         {
-            "src": "uhv_project/wsgi.py",
+            "src": "index.py",
             "use": "@vercel/python",
             "config": {
-                "maxLambdaSize": "15mb"
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.10.x"
             }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "uhv_project/wsgi.py"
+            "dest": "index.py"
         }
     ]
 }
