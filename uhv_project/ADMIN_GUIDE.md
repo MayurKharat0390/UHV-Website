@@ -96,21 +96,21 @@ python manage.py createsuperuser
 
 ---
 
-### 6. **STUDENT VOICES** 💬
-**Location:** Admin → Voices → Student Voices
+### 6. **IMPACT STORIES** 💬
+**Location:** Admin → Voices → Impact Stories
 
 **Features:**
 - ✅ **Approve/Reject submissions**
-- ✅ Bulk approve multiple voices
+- ✅ Bulk approve multiple stories
 - ✅ View submission date
 - ✅ See anonymous vs named submissions
 - ✅ Moderate content before public display
 
 **Approval Workflow:**
-1. New voice submitted → `is_approved = False`
+1. New story submitted → `is_approved = False`
 2. Admin reviews content
-3. Select voice → Actions → "Approve selected voices"
-4. Voice appears on public page
+3. Select story → Actions → "Approve selected stories"
+4. Story appears on public page
 
 ---
 
@@ -222,7 +222,7 @@ python manage.py createsuperuser
 ## 🎯 COMMON ADMIN TASKS
 
 ### **Daily Tasks:**
-1. ✅ Approve new student voices
+1. ✅ Approve new impact stories
 2. ✅ Check new journal entries (for support)
 3. ✅ Monitor user activity
 
@@ -269,7 +269,7 @@ python manage.py createsuperuser
 - [ ] Add 10+ inspirational quotes
 - [ ] Create 2-3 upcoming activities
 - [ ] Add faculty profiles
-- [ ] Test approval workflow for student voices
+- [ ] Test approval workflow for impact stories
 
 ---
 

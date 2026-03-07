@@ -25,7 +25,7 @@ Your admin panel now has a **modern, beautiful, and user-friendly interface** wi
 - **Reflections** 🤔 - Scenarios, options, and responses
 - **Journals** 📔 - Student journal entries
 - **Activities** 🎯 - Events and activities
-- **Voices** 💬 - Student testimonials
+- **Impact Stories** 💬 - Transformational stories
 - **Faculty** 👨‍🏫 - Faculty profiles
 - **Resources** 📚 - Learning materials
 - **Quotes** 💭 - Inspirational quotes
@@ -38,7 +38,7 @@ Each section has a unique icon for easy identification:
 - 💬 User Responses
 - 📖 Journal Entries
 - 📅 Activities
-- 🎤 Student Voices
+- 🎤 Impact Stories
 - 👨‍🏫 Faculty
 - 📁 Resources
 - 💬 Quotes
@@ -96,10 +96,10 @@ Each section has a unique icon for easy identification:
 ## 📊 **Common Admin Tasks**
 
 ### **Daily Tasks:**
-1. **Approve Student Voices**
-   - Go to: Voices → Student Voices
-   - Select pending voices
-   - Actions → "Approve selected voices"
+1. **Approve Impact Stories**
+   - Go to: Voices → Impact Stories
+   - Select pending stories
+   - Actions → "Approve selected stories"
 
 2. **Monitor Activity**
    - Go to: Progress → User Progress
@@ -197,7 +197,7 @@ After logging in:
 - [ ] Upload 3-5 resources
 - [ ] Add 10+ inspirational quotes
 - [ ] Create 2-3 upcoming activities
-- [ ] Approve any pending student voices
+- [ ] Approve any pending impact stories
 - [ ] Check user progress/streaks
 
 ---

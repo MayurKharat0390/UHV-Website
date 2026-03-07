@@ -5,7 +5,8 @@ from .models import StudentVoice
 class StudentVoiceAdmin(admin.ModelAdmin):
     list_display = ('name_display', 'created_at', 'is_approved')
     list_filter = ('is_approved', 'created_at')
-    actions = ['approve_voices']
+    actions = ['approve_stories']
 
-    def approve_voices(self, request, queryset):
+    def approve_stories(self, request, queryset):
         queryset.update(is_approved=True)
+    approve_stories.short_description = 'Approve selected stories'

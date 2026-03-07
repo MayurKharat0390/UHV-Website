@@ -6,6 +6,6 @@ class VoiceForm(forms.ModelForm):
         model = StudentVoice
         fields = ['name_display', 'content']
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Share your reflection (100-150 words)...'}),
+            'content': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Share your impact story (100-150 words)...'}),
             'name_display': forms.TextInput(attrs={'placeholder': 'Your Name or Anonymous'})
         }
