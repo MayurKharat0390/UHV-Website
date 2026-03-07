@@ -1,10 +1,15 @@
 from django.contrib import admin
-from .models import StudentVoice
+from .models import StudentVoice, StoryMedia
+
+class StoryMediaInline(admin.TabularInline):
+    model = StoryMedia
+    extra = 1
 
 @admin.register(StudentVoice)
 class StudentVoiceAdmin(admin.ModelAdmin):
     list_display = ('name_display', 'created_at', 'is_approved')
     list_filter = ('is_approved', 'created_at')
+    inlines = [StoryMediaInline]
     actions = ['approve_stories']
 
     def approve_stories(self, request, queryset):

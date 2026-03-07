@@ -13,4 +13,20 @@ class StudentVoice(models.Model):
         verbose_name_plural = "Impact Stories"
 
     def __str__(self):
-        return f"Impact Story by {self.name_display} - Approved: {self.is_approved}"
+        return f"Impact Story by {self.name_display} - Approved: {self.is_approved} "
+
+class StoryMedia(models.Model):
+    story = models.ForeignKey(StudentVoice, related_name='media', on_delete=models.CASCADE)
+    file = models.FileField(upload_to='story_media/', help_text="Upload photo or video")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def is_image(self):
+        ext = self.file.name.split('.')[-1].lower()
+        return ext in ['jpg', 'jpeg', 'png', 'gif', 'webp']
+
+    def is_video(self):
+        ext = self.file.name.split('.')[-1].lower()
+        return ext in ['mp4', 'mov', 'avi', 'webm']
+
+    def __str__(self):
+        return f"Media for {self.story.name_display}"
