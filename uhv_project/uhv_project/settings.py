@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_htmx.middleware.HtmxMiddleware',
+    'core.middleware.VisitorTrackMiddleware',
 ]
 
 ROOT_URLCONF = 'uhv_project.urls'
@@ -73,6 +74,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'quotes.context_processors.daily_quote',
                 'core.context_processors.news_ticker',
+                'core.context_processors.daily_reflection',
+                'core.context_processors.visitor_count',
             ],
         },
     },

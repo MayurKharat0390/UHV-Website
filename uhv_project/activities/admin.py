@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Activity
+from .models import Activity, ActivityImage
+
+class ActivityImageInline(admin.TabularInline):
+    model = ActivityImage
+    extra = 1
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
@@ -20,6 +24,7 @@ class ActivityAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+    inlines = [ActivityImageInline]
     
     actions = ['mark_as_past', 'mark_as_upcoming']
     

@@ -8,8 +8,11 @@ class Activity(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='activities/', blank=True, null=True)
 
-    class Meta:
-        verbose_name_plural = "Activities"
+
+class ActivityImage(models.Model):
+    activity = models.ForeignKey(Activity, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='activities/gallery/')
+    caption = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
-        return self.title
+        return f"Image for {self.activity.title}"
