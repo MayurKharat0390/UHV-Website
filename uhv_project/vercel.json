@@ -23,6 +23,10 @@
             "dest": "/$1"
         },
         {
+            "src": "/media/(.*)",
+            "dest": "/$1"
+        },
+        {
             "src": "/(.*)",
             "dest": "uhv_project/wsgi.py"
         }

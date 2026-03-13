@@ -14,7 +14,9 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-uhv-academic-platform
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.railway.app,.vercel.app', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.railway.app,.vercel.app,.now.sh', cast=Csv())
+CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if not host.startswith(('localhost', '127.0.0.1'))]
+CSRF_TRUSTED_ORIGINS += ["http://localhost:8000", "http://127.0.0.1:8000"]
 
 
 # Application definition
@@ -141,14 +143,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Only include STATICFILES_DIRS if the directory exists (for local development)
-import os
-if os.path.exists(BASE_DIR / 'static'):
-    STATICFILES_DIRS = [BASE_DIR / 'static']
-else:
-    STATICFILES_DIRS = []
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = []
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # For collectstatic
+# Include local static files if they exist
+if (BASE_DIR / 'static').exists():
+    STATICFILES_DIRS.append(BASE_DIR / 'static')
+
+# Also include media in STATICFILES_DIRS so collectstatic captures them for Vercel deployment
+# This allows serving existing media files (like student avatars) as static assets
+if (BASE_DIR / 'media').exists():
+    STATICFILES_DIRS.append(BASE_DIR / 'media')
 
 # WhiteNoise configuration for serving static files
 # Use CompressedStaticFilesStorage instead of Manifest version to avoid .map file errors
@@ -328,5 +333,5 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     
-    # Trust Railway proxy headers
+    # Trust Railway and Vercel proxy headers
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

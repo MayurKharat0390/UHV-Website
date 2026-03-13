@@ -1,3 +1,5 @@
 #!/bin/bash
-python -m pip install -r requirements.txt --break-system-packages
-python manage.py collectstatic --noinput --clear
+echo "BUILD START"
+python3 -m pip install -r requirements.txt
+python3 manage.py collectstatic --noinput --clear
+echo "BUILD END"
