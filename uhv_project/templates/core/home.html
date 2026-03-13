@@ -2,84 +2,146 @@
 {% block content %}
 {% load static %}
 <!-- Hero Section with Slides & Staggered Reveal -->
-<section class="relative overflow-hidden pt-12 pb-24 lg:pt-20 lg:pb-32">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="flex flex-col lg:flex-row items-center gap-16">
-            <!-- Left Side: Text Content -->
-            <div class="w-full lg:w-1/2 text-center lg:text-left">
-                <div class="slide-up [animation-delay:200ms]">
-                    <div
-                        class="inline-flex items-center justify-center px-4 py-1.5 mb-8 glass rounded-full shadow-sm text-[10px] font-extrabold tracking-widest uppercase text-primary-600 border border-primary-100">
-                        <span class="w-2 h-2 rounded-full bg-accent-500 mr-2 animate-pulse"></span>
-                        Academic Excellence & Moral Grounding
-                    </div>
-                </div>
+<!-- Cinematic Hero Slider Container -->
+<section x-data="{ 
+    activeSlide: 0,
+    progress: 0,
+    slides: [
+        { 
+            image: '{% static 'images/pccoe1.jpeg' %}', 
+            label: 'Institutional Excellence',
+            title: 'Cultivating', 
+            subtitle: 'Human Values', 
+            desc: 'Bridge the gap between technical brilliance and ethical living at Institute UHV Cell.' 
+        },
+        { 
+            image: '/media/activities/seva/seva_1.png', 
+            label: 'Values in Action',
+            title: 'Spirit of', 
+            subtitle: 'Compassion', 
+            desc: 'Reviving humane values through selfless service and community initiatives.' 
+        },
+        { 
+            image: '{% static 'images/pccoe2.jpg' %}', 
+            label: 'Nurturing Leaders',
+            title: 'Ethical', 
+            subtitle: 'Leadership', 
+            desc: 'Fostering ethically grounded leaders who catalyze social harmony and well-being.' 
+        },
+        { 
+            image: '/media/activities/health_campaign/health_1.jpg', 
+            label: 'Holistic Growth',
+            title: 'Universal', 
+            subtitle: 'Harmony', 
+            desc: 'Discover your higher purpose through self-exploration and sustainable living.' 
+        }
+    ],
+    next() { 
+        this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+        this.progress = 0;
+    },
+    init() { 
+        setInterval(() => {
+            this.progress += 0.5;
+            if (this.progress >= 100) { this.next() }
+        }, 30);
+    }
+}" x-init="init()" class="relative h-[85vh] min-h-[600px] overflow-hidden bg-gray-900 group">
 
-                <h1
-                    class="slide-up [animation-delay:400ms] text-5xl md:text-7xl xl:text-8xl font-serif font-bold tracking-tight leading-[1.1] mb-8 text-gray-900">
-                    <span class="block">Cultivating</span>
-                    <span class="gradient-text">Human Values</span>
-                </h1>
+    <!-- Background Slides -->
+    <template x-for="(slide, index) in slides" :key="index">
+        <div x-show="activeSlide === index" 
+             x-transition:enter="transition ease-out duration-1000"
+             x-transition:enter-start="opacity-0 scale-105"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-1000"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="absolute inset-0 z-0">
+            <!-- Ken Burns Effect Image -->
+            <img :src="slide.image" 
+                 class="w-full h-full object-cover transition-transform duration-[10000ms] ease-linear transform scale-110"
+                 :class="activeSlide === index ? 'scale-100' : 'scale-110'"
+                 alt="Hero Background">
+            <!-- Dynamic Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/40 to-transparent"></div>
+        </div>
+    </template>
 
-                <p
-                    class="slide-up [animation-delay:600ms] text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-                    Bridge the gap between technical brilliance and ethical living. Discover a higher purpose through
-                    self-exploration, empathy, and universal harmony at <span
-                        class="text-primary-600 font-bold">PCCOE</span>.
-                </p>
-
-                <div
-                    class="slide-up [animation-delay:800ms] flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4">
-                    <a href="{% url 'reflections:daily_reflection' %}"
-                        class="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-2xl text-lg font-bold shadow-xl hover:bg-primary-700 hover:-translate-y-1 transition-all">
-                        Begin Reflection
-                    </a>
-                    <a href="#explore-values"
-                        class="w-full sm:w-auto px-8 py-4 glass-strong text-primary-800 rounded-2xl text-lg font-bold shadow-md hover:shadow-lg hover:-translate-y-1 transition-all border border-white">
-                        Explore Values
-                    </a>
-                </div>
-            </div>
-
-            <!-- Right Side: Staggered Image Gallery -->
-            <div class="w-full lg:w-1/2 relative flex justify-center items-center">
-                <div class="relative w-full max-w-[500px] aspect-[4/5]">
-                    <!-- Main Hero Image -->
-                    <div
-                        class="slide-up [animation-delay:1000ms] absolute top-0 right-0 w-[85%] h-[85%] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white transform rotate-3 z-20 hover:rotate-0 transition-transform duration-700">
-                        <img src="{% static 'images/pccoe1.jpeg' %}" alt="Campus Life"
-                            class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-primary-900/40 to-transparent"></div>
-                    </div>
-
-                    <!-- Secondary Overlapping Image -->
-                    <div
-                        class="slide-up [animation-delay:1200ms] absolute bottom-0 left-0 w-[60%] h-[60%] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white transform -rotate-6 z-30 hover:rotate-0 transition-transform duration-700">
-                        <img src="{% static 'images/pccoe2.jpg' %}" alt="Campus Entrance"
-                            class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-primary-900/40 to-transparent"></div>
-                    </div>
-
-                    <!-- Decorative Badge -->
-                    <div
-                        class="slide-up [animation-delay:1400ms] absolute bottom-10 right-0 z-40 bg-accent-500 text-primary-900 p-6 rounded-3xl shadow-glow-accent transform rotate-12 -translate-x-12">
-                        <div class="text-center">
-                            <span class="block text-4xl font-bold font-serif mb-1">PCCOE</span>
-                            <span class="block text-[10px] font-extrabold uppercase tracking-widest leading-none">Values
-                                in Action</span>
+    <!-- Content Overlay -->
+    <div class="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center z-10">
+        <div class="max-w-3xl">
+            <template x-for="(slide, index) in slides" :key="index">
+                <div x-show="activeSlide === index" class="space-y-8">
+                    <!-- Staggered Content Animation -->
+                    <div x-show="activeSlide === index" 
+                         x-transition:enter="transition ease-out duration-700 delay-300"
+                         x-transition:enter-start="opacity-0 translate-y-8"
+                         x-transition:enter-end="opacity-100 translate-y-0">
+                        <div class="inline-flex items-center px-4 py-2 glass rounded-full text-xs font-bold tracking-widest uppercase text-accent-400 border border-white/10 mb-6">
+                            <span class="w-2 h-2 rounded-full bg-accent-500 mr-2 animate-pulse"></span>
+                            <span x-text="slide.label"></span>
                         </div>
                     </div>
+
+                    <h1 x-show="activeSlide === index" 
+                        x-transition:enter="transition ease-out duration-700 delay-500"
+                        x-transition:enter-start="opacity-0 translate-y-8"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        class="text-6xl md:text-8xl font-serif font-black text-white leading-tight">
+                        <span class="block" x-text="slide.title"></span>
+                        <span class="gradient-text block" x-text="slide.subtitle"></span>
+                    </h1>
+
+                    <p x-show="activeSlide === index" 
+                       x-transition:enter="transition ease-out duration-700 delay-700"
+                       x-transition:enter-start="opacity-0 translate-y-8"
+                       x-transition:enter-end="opacity-100 translate-y-0"
+                       class="text-xl text-gray-200 font-light leading-relaxed max-w-xl"
+                       x-text="slide.desc"></p>
+
+                    <div x-show="activeSlide === index" 
+                         x-transition:enter="transition ease-out duration-700 delay-900"
+                         x-transition:enter-start="opacity-0 translate-y-8"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         class="flex flex-col sm:flex-row items-center gap-6 pt-4">
+                        <a href="{% url 'reflections:daily_reflection' %}"
+                            class="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-2xl text-lg font-bold shadow-2xl hover:bg-primary-500 hover:-translate-y-1 transition-all flex items-center justify-center gap-3 group/btn">
+                            Begin Journey
+                            <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                        <a href="#explore-values"
+                            class="w-full sm:w-auto px-8 py-4 glass-strong text-white rounded-2xl text-lg font-bold shadow-lg hover:bg-white/10 hover:-translate-y-1 transition-all border border-white/20">
+                            Explore Values
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 
-    <!-- Decorative floating patterns -->
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-screen-xl pointer-events-none opacity-20">
-        <svg class="w-full h-24 text-primary-200" viewBox="0 0 1000 100">
-            <path d="M0 100 Q 250 10 500 100 T 1000 100" fill="none" stroke="currentColor" stroke-width="2" />
-        </svg>
+    <!-- Slider Navigation Dots -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
+        <template x-for="(slide, index) in slides" :key="index">
+            <button @click="activeSlide = index; progress = 0" 
+                    class="relative h-1 transition-all duration-500 rounded-full bg-white/20 overflow-hidden"
+                    :class="activeSlide === index ? 'w-12' : 'w-6 hover:bg-white/40'">
+                <div x-show="activeSlide === index" 
+                     class="absolute inset-0 bg-accent-400"
+                     :style="'width: ' + progress + '%'"></div>
+            </button>
+        </template>
     </div>
+
+    <!-- Side Controls -->
+    <button @click="prev()" class="absolute left-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full glass text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 hidden md:block">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    </button>
+    <button @click="next()" class="absolute right-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full glass text-white opacity-0 group-hover:opacity-100 transition-all hover:bg-white/10 hidden md:block">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </button>
 </section>
 
 <!-- Vision & Mission Section - Typographic Outline -->
