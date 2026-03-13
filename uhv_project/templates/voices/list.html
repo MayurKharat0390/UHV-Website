@@ -25,69 +25,49 @@
         </div>
     </div>
 
-    <!-- Voices Masonry Grid -->
-    <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+    <!-- Uniform Voices Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for voice in voices %}
         <div
-            class="break-inside-avoid card-3d glass-strong p-8 rounded-3xl shadow-glass hover:shadow-3d relative group overflow-hidden">
+            class="group card-3d glass-strong p-8 rounded-[2.5rem] shadow-glass hover:shadow-3d relative flex flex-col h-full overflow-hidden transition-all duration-500">
             <!-- Gradient accent -->
             <div
-                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-400 via-indigo-500 to-accent-400">
+                class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary-400 via-indigo-500 to-accent-400">
             </div>
 
-            <!-- Quote Icon -->
+            <!-- Quote Icon Decoration -->
             <div
-                class="absolute -top-2 -left-2 w-16 h-16 bg-gradient-to-br from-primary-200 to-primary-300 rounded-full blur-2xl opacity-30 group-hover:opacity-40 transition-opacity">
+                class="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity">
             </div>
-            <svg class="relative w-10 h-10 text-primary-200 mb-6" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                    d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9C9.55228 16 10 15.5523 10 15V9C10 8.44772 9.55228 8 9 8H5C4.44772 8 4 8.44772 4 9V15C4 16.6569 5.34315 18 7 18H9.983L9.983 21H14.017Z">
-                </path>
-            </svg>
 
             <div class="relative z-10 flex flex-col h-full">
-                <p class="text-gray-700 leading-relaxed text-lg mb-8 italic font-light">
-                    "{{ voice.content }}"
-                </p>
+                <svg class="w-10 h-10 text-primary-200 mb-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9C9.55228 16 10 15.5523 10 15V9C10 8.44772 9.55228 8 9 8H5C4.44772 8 4 8.44772 4 9V15C4 16.6569 5.34315 18 7 18H9.983L9.983 21H14.017Z"></path>
+                </svg>
 
-                {% if voice.media.count > 1 %}
-                <div class="grid grid-cols-2 gap-2 mb-8">
-                    {% for m in voice.media.all %}
-                    <div class="rounded-xl overflow-hidden aspect-video relative">
-                        {% if m.is_image %}
-                        <img src="{{ m.file.url }}" alt="Story Image"
-                            class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                        {% elif m.is_video %}
-                        <video src="{{ m.file.url }}" controls
-                            class="absolute inset-0 w-full h-full object-contain"></video>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
+                <div class="flex-grow">
+                    <!-- Text clamped to 6 lines for uniformity -->
+                    <p class="text-gray-700 leading-relaxed text-lg mb-8 italic font-light line-clamp-6 group-hover:line-clamp-none transition-all duration-700">
+                        "{{ voice.content }}"
+                    </p>
                 </div>
-                {% elif voice.media.count == 1 and not voice.media.all.0.is_image %}
-                <!-- Single Video Display -->
-                <div class="rounded-2xl overflow-hidden aspect-video relative bg-black mb-8 shadow-lg">
-                    <video src="{{ voice.media.all.0.file.url }}" controls
-                        class="absolute inset-0 w-full h-full object-contain"></video>
-                </div>
-                {% endif %}
 
-                <div class="flex items-center mt-auto pt-6 border-t border-gray-100">
+                <div class="flex items-center pt-8 mt-auto border-t border-gray-100 flex-shrink-0">
                     {% with media=voice.media.all.0 %}
                     {% if media and media.is_image %}
-                    <div class="w-14 h-14 rounded-2xl overflow-hidden shadow-lg border-2 border-white mr-4 flex-shrink-0">
+                    <div class="w-14 h-14 rounded-2xl overflow-hidden shadow-lg border-2 border-white mr-4 flex-shrink-0 ring-4 ring-primary-50">
                         <img src="{{ media.file.url }}" class="w-full h-full object-cover">
                     </div>
                     {% else %}
                     <div
-                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-xl shadow-lg mr-4 flex-shrink-0">
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-black text-xl shadow-lg mr-4 flex-shrink-0">
                         {{ voice.name_display|slice:":1"|upper }}
                     </div>
                     {% endif %}
                     {% endwith %}
                     <div class="overflow-hidden">
-                        <p class="text-base font-bold text-gray-900 truncate">{{ voice.name_display }}</p>
-                        <p class="text-xs text-gray-400">{{ voice.created_at|date:"M j, Y" }}</p>
+                        <p class="text-sm font-black text-gray-900 truncate tracking-tight">{{ voice.name_display|truncatechars:35 }}</p>
+                        <p class="text-[10px] font-bold text-primary-500 uppercase tracking-widest mt-0.5 opacity-70">Shared on {{ voice.created_at|date:"M j, Y" }}</p>
                     </div>
                 </div>
             </div>
