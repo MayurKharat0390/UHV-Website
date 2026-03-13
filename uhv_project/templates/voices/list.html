@@ -45,36 +45,48 @@
                 </path>
             </svg>
 
-            <div class="relative z-10">
+            <div class="relative z-10 flex flex-col h-full">
                 <p class="text-gray-700 leading-relaxed text-lg mb-8 italic font-light">
                     "{{ voice.content }}"
                 </p>
 
-                {% if voice.media.all %}
+                {% if voice.media.count > 1 %}
                 <div class="grid grid-cols-2 gap-2 mb-8">
                     {% for m in voice.media.all %}
-                    {% if m.is_image %}
                     <div class="rounded-xl overflow-hidden aspect-video relative">
+                        {% if m.is_image %}
                         <img src="{{ m.file.url }}" alt="Story Image"
                             class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    {% elif m.is_video %}
-                    <div class="rounded-xl overflow-hidden aspect-video relative bg-black">
+                        {% elif m.is_video %}
                         <video src="{{ m.file.url }}" controls
                             class="absolute inset-0 w-full h-full object-contain"></video>
+                        {% endif %}
                     </div>
-                    {% endif %}
                     {% endfor %}
+                </div>
+                {% elif voice.media.count == 1 and not voice.media.all.0.is_image %}
+                <!-- Single Video Display -->
+                <div class="rounded-2xl overflow-hidden aspect-video relative bg-black mb-8 shadow-lg">
+                    <video src="{{ voice.media.all.0.file.url }}" controls
+                        class="absolute inset-0 w-full h-full object-contain"></video>
                 </div>
                 {% endif %}
 
-                <div class="flex items-center pt-6 border-t border-gray-100">
+                <div class="flex items-center mt-auto pt-6 border-t border-gray-100">
+                    {% with media=voice.media.all.0 %}
+                    {% if media and media.is_image %}
+                    <div class="w-14 h-14 rounded-2xl overflow-hidden shadow-lg border-2 border-white mr-4 flex-shrink-0">
+                        <img src="{{ media.file.url }}" class="w-full h-full object-cover">
+                    </div>
+                    {% else %}
                     <div
-                        class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-lg shadow-lg mr-4">
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white font-bold text-xl shadow-lg mr-4 flex-shrink-0">
                         {{ voice.name_display|slice:":1"|upper }}
                     </div>
-                    <div>
-                        <p class="text-sm font-bold text-gray-800">{{ voice.name_display }}</p>
+                    {% endif %}
+                    {% endwith %}
+                    <div class="overflow-hidden">
+                        <p class="text-base font-bold text-gray-900 truncate">{{ voice.name_display }}</p>
                         <p class="text-xs text-gray-400">{{ voice.created_at|date:"M j, Y" }}</p>
                     </div>
                 </div>
