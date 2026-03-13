@@ -3,7 +3,10 @@ from .models import StudentVoice, StoryMedia
 from .forms import VoiceForm
 
 def voice_list(request):
-    voices = StudentVoice.objects.filter(is_approved=True).prefetch_related('media').order_by('-created_at')
+    try:
+        voices = list(StudentVoice.objects.filter(is_approved=True).prefetch_related('media').order_by('-created_at'))
+    except Exception:
+        voices = []
     
     if request.method == 'POST':
         form = VoiceForm(request.POST, request.FILES)

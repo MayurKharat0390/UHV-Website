@@ -4,10 +4,13 @@ from .models import Resource
 def resource_list(request):
     category = request.GET.get('category', 'all')
     
-    if category == 'all':
-        resources = Resource.objects.all()
-    else:
-        resources = Resource.objects.filter(category=category)
+    try:
+        if category == 'all':
+            resources = list(Resource.objects.all())
+        else:
+            resources = list(Resource.objects.filter(category=category))
+    except Exception:
+        resources = []
     
     categories = [
         ('all', 'All Resources'),
