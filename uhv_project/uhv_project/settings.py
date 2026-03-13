@@ -95,11 +95,12 @@ if DATABASE_URL:
         'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
 elif 'VERCEL' in os.environ:
-    # Vercel fallback: Use in-memory SQLite to avoid Read-Only filesystem errors
+    # Vercel fallback: Use the bundled db.sqlite3 file. 
+    # Note: Changes made in the Admin panel on the live site will NOT persist across redeploys.
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 else:

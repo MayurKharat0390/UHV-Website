@@ -30,9 +30,17 @@ def resource_list(request):
     return render(request, 'resources/list.html', context)
 
 def resource_detail(request, pk):
-    resource = Resource.objects.get(pk=pk)
-    resource.views_count += 1
-    resource.save()
+    try:
+        resource = Resource.objects.get(pk=pk)
+        resource.views_count += 1
+        # Try-save but catch if DB is readonly
+        try:
+            resource.save()
+        except Exception:
+            pass
+    except Exception:
+        from django.http import Http404
+        raise Http404("Resource not found or DB error")
     
     context = {'resource': resource}
     return render(request, 'resources/detail.html', context)
