@@ -5,8 +5,9 @@ def daily_quote(request):
     """Add a random quote to all templates"""
     try:
         quotes = Quote.objects.filter(is_active=True)
+        # Force evaluation to catch DB errors early
         if quotes.exists():
-            quote = random.choice(quotes)
+            quote = random.choice(list(quotes))
             return {'daily_quote': quote}
     except Exception:
         pass

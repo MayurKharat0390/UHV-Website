@@ -29,7 +29,7 @@ ENV/
 
 # Django
 *.log
-db.sqlite3
+# db.sqlite3  <-- Commented out to include in repo for Vercel fallback
 db.sqlite3-journal
 /media
 /staticfiles
