@@ -13,11 +13,15 @@ class VisitorTrackMiddleware:
             ip = request.META.get('REMOTE_ADDR')
 
         if ip:
-            visitor, created = SiteVisitor.objects.get_or_create(ip_address=ip)
-            if not created:
-                # If seen before, just update the last visit and increment count
-                visitor.visit_count += 1
-                visitor.save()
+            try:
+                visitor, created = SiteVisitor.objects.get_or_create(ip_address=ip)
+                if not created:
+                    # If seen before, just update the last visit and increment count
+                    visitor.visit_count += 1
+                    visitor.save()
+            except Exception:
+                # Silently fail if DB is read-only or has issues
+                pass
 
         response = self.get_response(request)
         return response

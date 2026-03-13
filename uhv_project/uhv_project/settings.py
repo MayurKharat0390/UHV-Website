@@ -86,19 +86,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'uhv_project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-# Use PostgreSQL in production (Railway), SQLite in development
+# Database configuration
 DATABASE_URL = config('DATABASE_URL', default=None)
 
 if DATABASE_URL:
-    # Production: Use PostgreSQL from Railway
+    # Production: Use PostgreSQL from Railway/Vercel
     DATABASES = {
         'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
+elif 'VERCEL' in os.environ:
+    # Vercel fallback: Use in-memory SQLite to avoid Read-Only filesystem errors
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
+    }
 else:
-    # Development: Use SQLite
+    # Development: Use local SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
