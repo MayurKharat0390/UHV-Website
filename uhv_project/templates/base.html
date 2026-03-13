@@ -30,19 +30,30 @@
                 extend: {
                     colors: {
                         primary: {
-                            DEFAULT: '#4f46e5', // Indigo 600
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            200: '#ddd6fe',
-                            300: '#c4b5fd',
-                            400: '#a78bfa',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                            800: '#5b21b6',
-                            900: '#4c1d95',
+                            DEFAULT: '#0d9488', // Teal 600
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
                         },
                         accent: {
+                            DEFAULT: '#0ea5e9', // Sky Blue 500
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        },
+                        harmony: {
                             DEFAULT: '#10b981', // Emerald 500
                             50: '#ecfdf5',
                             100: '#d1fae5',
@@ -50,18 +61,6 @@
                             300: '#6ee7b7',
                             400: '#34d399',
                             500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                        },
-                        indigo: {
-                            DEFAULT: '#6366f1',
-                            50: '#eef2ff',
-                            100: '#e0e7ff',
-                            200: '#c7d2fe',
-                            300: '#a5b4fc',
-                            400: '#818cf8',
-                            500: '#6366f1',
-                            600: '#4f46e5',
                         }
                     },
                     fontFamily: {
@@ -341,10 +340,10 @@
                 <a href="{% url 'core:home' %}" class="flex items-center space-x-3 group text-decoration-none">
                     <div class="relative">
                         <div
-                            class="absolute inset-0 bg-gradient-to-r from-emerald-400 to-indigo-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-r from-accent-400 to-primary-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity">
                         </div>
                         <div
-                            class="relative w-12 h-12 bg-gradient-to-br from-indigo-600 to-emerald-600 rounded-2xl flex items-center justify-center font-serif font-bold text-2xl text-emerald-400 shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all">
+                            class="relative w-12 h-12 bg-gradient-to-br from-primary-600 to-accent-600 rounded-2xl flex items-center justify-center font-serif font-bold text-2xl text-accent-400 shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all">
                             U
                         </div>
                     </div>
@@ -352,7 +351,7 @@
                         <span
                             class="block text-lg font-serif font-bold bg-gradient-to-r from-primary-600 to-primary-900 bg-clip-text text-transparent leading-none">UHV</span>
                         <span
-                            class="block text-[10px] font-bold text-gray-500 tracking-widest uppercase">Department</span>
+                            class="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Department</span>
                     </div>
                 </a>
 
@@ -360,21 +359,20 @@
                 <div class="hidden md:flex items-center space-x-2 glass px-3 py-2 rounded-full shadow-glass">
                     {% with request.resolver_match.view_name as view_name %}
                     <a href="{% url 'core:home' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:home' %}bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-emerald-600 hover:bg-emerald-50{% endif %}">Home</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:home' %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Home</a>
                     <a href="{% url 'core:uhv_cell' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:uhv_cell' %}bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-emerald-600 hover:bg-emerald-50{% endif %}">UHV
-                        Cell</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:uhv_cell' %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Institute UHV Cell</a>
                     <a href="{% url 'resources:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'resources' in view_name %}bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-glow-accent{% else %}text-gray-700 hover:text-emerald-600 hover:bg-emerald-50{% endif %}">Resources</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'resources' in view_name %}bg-gradient-to-r from-accent-600 to-accent-700 text-white shadow-glow-accent{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Resources</a>
                     <a href="{% url 'activities:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'activities' in view_name %}bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-emerald-600 hover:bg-emerald-50{% endif %}">Activities</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'activities' in view_name %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Activities</a>
                     <a href="{% url 'voices:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'voices' in view_name %}bg-gradient-to-r from-indigo-500 to-white text-indigo-900 shadow-glow-primary{% else %}text-gray-700 hover:text-emerald-600 hover:bg-emerald-50{% endif %}">Impact
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'voices' in view_name %}bg-gradient-to-r from-accent-600 to-accent-700 text-white shadow-glow-accent{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Impact
                         Stories</a>
                     <a href="{% url 'innovations:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'innovations' in view_name %}bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-emerald-600 hover:bg-emerald-50{% endif %}">Innovations</a>
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'innovations' in view_name %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Innovations</a>
                     <a href="{% url 'core:contact' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:contact' %}bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-emerald-600 hover:bg-emerald-50{% endif %}">Contact
+                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:contact' %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Contact
                         Us</a>
                     {% endwith %}
                 </div>
@@ -425,18 +423,15 @@
                 </svg>
             </button>
             <a href="{% url 'core:home' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">Home</a>
-            <a href="{% url 'core:uhv_cell' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">UHV
-                Cell</a>
+            <a href="{% url 'core:uhv_cell' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">Institute UHV Cell</a>
             <a href="{% url 'resources:list' %}"
                 class="text-xl font-bold text-gray-800 hover:text-accent-600">Resources</a>
             <a href="{% url 'activities:list' %}"
                 class="text-xl font-bold text-gray-800 hover:text-primary-700">Activities</a>
-            <a href="{% url 'voices:list' %}" class="text-xl font-bold text-gray-800 hover:text-accent-500">Impact
-                Stories</a>
+            <a href="{% url 'voices:list' %}" class="text-xl font-bold text-gray-800 hover:text-accent-500">Impact Stories</a>
             <a href="{% url 'innovations:list' %}"
                 class="text-xl font-bold text-gray-800 hover:text-primary-600">Innovations</a>
-            <a href="{% url 'core:contact' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">Contact
-                Us</a>
+            <a href="{% url 'core:contact' %}" class="text-xl font-bold text-gray-800 hover:text-primary-600">Contact Us</a>
         </div>
     </div>
 
