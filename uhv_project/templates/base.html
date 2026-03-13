@@ -285,95 +285,84 @@
             style="animation-delay: 3s;"></div>
     </div>
 
-    <!-- Institutional Header -->
-    <header class="bg-white border-b border-gray-100 py-4 shadow-sm relative z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6">
+    <!-- Institutional    <!-- Main College Header -->
+    <header class="bg-[#fcfdfd] py-6 border-b border-gray-100/80 relative z-[60]">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8">
                 <!-- Left Logos -->
-                <div class="flex items-center space-x-6">
+                <div class="flex items-center">
                     <img src="{% static 'images/pccoe_logo.png' %}" alt="PCCOE Logo"
-                        class="h-20 md:h-28 w-auto hover:scale-105 transition-transform duration-300">
+                        class="h-16 md:h-24 w-auto drop-shadow-sm hover:scale-105 transition-transform duration-300">
                 </div>
 
                 <!-- Center Text Content -->
                 <div class="flex flex-col items-center justify-center flex-grow text-center px-4">
                     <h2
-                        class="text-primary-600 font-bold text-sm md:text-base tracking-[0.2em] uppercase leading-tight mb-1">
+                        class="text-primary-600 font-black text-[10px] md:text-xs tracking-[0.3em] uppercase leading-tight mb-2 opacity-80">
                         Pimpri Chinchwad Education Trust's
                     </h2>
                     <h1
-                        class="text-gray-900 font-extrabold text-xl md:text-3xl tracking-tight uppercase mb-2 font-serif">
+                        class="text-gray-900 font-extrabold text-xl md:text-4xl tracking-tight uppercase mb-3 font-serif leading-none">
                         Pimpri Chinchwad College of Engineering
                     </h1>
                     <div
-                        class="flex flex-wrap justify-center gap-x-2 gap-y-1 text-[10px] md:text-xs text-gray-500 font-medium">
-                        <span class="whitespace-nowrap">NBA Accredited</span>
-                        <span class="hidden md:inline text-gray-300">|</span>
-                        <span class="whitespace-nowrap">NAAC Accredited with 'A' Grade</span>
-                        <span class="hidden md:inline text-gray-300">|</span>
-                        <span class="whitespace-nowrap">An Autonomous Institute</span>
-                        <span class="hidden md:inline text-gray-300">|</span>
-                        <span class="whitespace-nowrap">AICTE Approved</span>
+                        class="flex flex-wrap justify-center gap-x-3 gap-y-1.5 text-[10px] md:text-xs text-gray-500 font-bold">
+                        <span class="whitespace-nowrap bg-gray-100/50 px-2 py-0.5 rounded shadow-sm">NBA Accredited</span>
+                        <span class="whitespace-nowrap bg-gray-100/50 px-2 py-0.5 rounded shadow-sm">NAAC Accredited 'A' Grade</span>
+                        <span class="whitespace-nowrap bg-gray-100/50 px-2 py-0.5 rounded shadow-sm">An Autonomous Institute</span>
+                        <span class="whitespace-nowrap bg-gray-100/50 px-2 py-0.5 rounded shadow-sm">AICTE Approved</span>
                     </div>
-                    <p class="text-[10px] md:text-xs text-gray-500 mt-1">
-                        ISO 21001:2018 Certified | Permanently Affiliated to <span
-                            class="text-primary-600 font-bold">SPPU, Pune</span>
-                    </p>
                 </div>
 
                 <!-- Right Logo -->
                 <div class="flex items-center">
                     <img src="{% static 'images/ai_year_logo.png' %}" alt="AI PCCOE Logo"
-                        class="h-20 md:h-28 w-auto hover:scale-105 transition-transform duration-300">
+                        class="h-16 md:h-24 w-auto drop-shadow-sm hover:scale-105 transition-transform duration-300">
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Navigation -->
+    <!-- Distinguished Navigation Bar -->
     <nav class="sticky top-0 w-full z-50 transition-all duration-500" x-data="{ scrolled: false }"
         @scroll.window="scrolled = (window.pageYOffset > 20)"
-        :class="scrolled ? 'glass-strong shadow-glass py-2' : 'glass py-3'">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-2xl py-2' : 'bg-white py-4 shadow-sm'">
+        <div class="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href="{% url 'core:home' %}" class="flex items-center space-x-3 group text-decoration-none">
+                <!-- Distinguished Logo -->
+                <a href="{% url 'core:home' %}" class="flex items-center space-x-4 group text-decoration-none">
                     <div class="relative">
                         <div
-                            class="absolute inset-0 bg-gradient-to-r from-accent-400 to-primary-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-600 rounded-2xl blur-md opacity-40 group-hover:opacity-100 transition-opacity">
                         </div>
                         <div
-                            class="relative w-12 h-12 bg-gradient-to-br from-primary-600 to-accent-600 rounded-2xl flex items-center justify-center font-serif font-bold text-2xl text-accent-400 shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all">
+                            class="relative w-12 h-12 bg-white border-2 border-primary-500/20 rounded-2xl flex items-center justify-center font-serif font-black text-2xl text-primary-600 shadow-xl transform group-hover:scale-105 group-hover:-rotate-3 transition-all duration-500">
                             U
                         </div>
                     </div>
                     <div>
                         <span
-                            class="block text-lg font-serif font-bold bg-gradient-to-r from-primary-600 to-primary-900 bg-clip-text text-transparent leading-none">UHV</span>
-                        <span
-                            class="block text-[10px] font-bold text-gray-400 tracking-widest uppercase">Department</span>
+                            class="block text-3xl font-serif font-black bg-gradient-to-r from-primary-600 via-primary-800 to-primary-900 bg-clip-text text-transparent leading-none tracking-tighter">UHV</span>
                     </div>
                 </a>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-2 glass px-3 py-2 rounded-full shadow-glass">
+                <!-- Nav Menu -->
+                <div class="hidden lg:flex items-center bg-gray-50/50 p-1.5 rounded-[2rem] border border-gray-100">
                     {% with request.resolver_match.view_name as view_name %}
                     <a href="{% url 'core:home' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:home' %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Home</a>
+                        class="px-6 py-2.5 rounded-full text-[13px] font-black uppercase tracking-wider whitespace-nowrap transition-all duration-500 {% if view_name == 'core:home' %}bg-primary-600 text-white shadow-glow-primary scale-105{% else %}text-gray-600 hover:text-primary-700 hover:bg-white{% endif %}">Home</a>
                     <a href="{% url 'core:uhv_cell' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:uhv_cell' %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Institute UHV Cell</a>
+                        class="px-6 py-2.5 rounded-full text-[13px] font-black uppercase tracking-wider whitespace-nowrap transition-all duration-500 {% if view_name == 'core:uhv_cell' %}bg-primary-600 text-white shadow-glow-primary scale-105{% else %}text-gray-600 hover:text-primary-700 hover:bg-white{% endif %}">Institute UHV Cell</a>
                     <a href="{% url 'resources:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'resources' in view_name %}bg-gradient-to-r from-accent-600 to-accent-700 text-white shadow-glow-accent{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Resources</a>
+                        class="px-6 py-2.5 rounded-full text-[13px] font-black uppercase tracking-wider whitespace-nowrap transition-all duration-500 {% if 'resources' in view_name %}bg-primary-600 text-white shadow-glow-primary scale-105{% else %}text-gray-600 hover:text-primary-700 hover:bg-white{% endif %}">Resources</a>
                     <a href="{% url 'activities:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'activities' in view_name %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Activities</a>
+                        class="px-6 py-2.5 rounded-full text-[13px] font-black uppercase tracking-wider whitespace-nowrap transition-all duration-500 {% if 'activities' in view_name %}bg-primary-600 text-white shadow-glow-primary scale-105{% else %}text-gray-600 hover:text-primary-700 hover:bg-white{% endif %}">Activities</a>
                     <a href="{% url 'voices:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'voices' in view_name %}bg-gradient-to-r from-accent-600 to-accent-700 text-white shadow-glow-accent{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Impact
-                        Stories</a>
+                        class="px-6 py-2.5 rounded-full text-[13px] font-black uppercase tracking-wider whitespace-nowrap transition-all duration-500 {% if 'voices' in view_name %}bg-primary-600 text-white shadow-glow-primary scale-105{% else %}text-gray-600 hover:text-primary-700 hover:bg-white{% endif %}">Impact Stories</a>
                     <a href="{% url 'innovations:list' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if 'innovations' in view_name %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Innovations</a>
+                        class="px-6 py-2.5 rounded-full text-[13px] font-black uppercase tracking-wider whitespace-nowrap transition-all duration-500 {% if 'innovations' in view_name %}bg-primary-600 text-white shadow-glow-primary scale-105{% else %}text-gray-600 hover:text-primary-700 hover:bg-white{% endif %}">Innovations</a>
                     <a href="{% url 'core:contact' %}"
-                        class="px-6 py-3 rounded-full text-base font-semibold transition-all duration-300 {% if view_name == 'core:contact' %}bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-glow-primary{% else %}text-gray-700 hover:text-primary-600 hover:bg-primary-50{% endif %}">Contact
-                        Us</a>
+                        class="px-6 py-2.5 rounded-full text-[13px] font-black uppercase tracking-wider whitespace-nowrap transition-all duration-500 {% if view_name == 'core:contact' %}bg-primary-600 text-white shadow-glow-primary scale-105{% else %}text-gray-600 hover:text-primary-700 hover:bg-white{% endif %}">Contact Us</a>
                     {% endwith %}
                 </div>
 
