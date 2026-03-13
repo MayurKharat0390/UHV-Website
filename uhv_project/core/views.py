@@ -6,21 +6,27 @@ from .forms import ContactForm
 from django.contrib import messages
 
 def home(request):
-    featured_innovations = Innovation.objects.filter(is_featured=True)[:3]
-    faculties = FacultyProfile.objects.all()
-    
-    # Dynamic values from DB
-    db_values = CoreValue.objects.all().prefetch_related('examples')
-    values = []
-    
-    for v in db_values:
-        example_dict = {ex.level: ex.text for ex in v.examples.all()}
-        values.append({
-            'name': v.name,
-            'desc': v.description,
-            'icon': v.icon,
-            'examples': example_dict
-        })
+    try:
+        featured_innovations = Innovation.objects.filter(is_featured=True)[:3]
+        faculties = FacultyProfile.objects.all()
+        
+        # Dynamic values from DB
+        db_values = CoreValue.objects.all().prefetch_related('examples')
+        values = []
+        
+        for v in db_values:
+            example_dict = {ex.level: ex.text for ex in v.examples.all()}
+            values.append({
+                'name': v.name,
+                'desc': v.description,
+                'icon': v.icon,
+                'examples': example_dict
+            })
+    except Exception:
+        # Fallback for errors or missing tables
+        featured_innovations = []
+        faculties = []
+        values = []
 
     # Fallback to hardcoded if DB is empty to prevent breakages during setup
     if not values:
