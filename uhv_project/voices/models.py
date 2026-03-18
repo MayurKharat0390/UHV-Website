@@ -6,11 +6,13 @@ class StudentVoice(models.Model):
     name_display = models.CharField(max_length=100, help_text="Name to display (e.g. 'Anonymous' or real name)")
     content = models.TextField(help_text="Short story of change (100-150 words)")
     is_approved = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Impact Story"
         verbose_name_plural = "Impact Stories"
+        ordering = ['order', '-created_at']
 
     def __str__(self):
         return f"Impact Story by {self.name_display} - Approved: {self.is_approved} "

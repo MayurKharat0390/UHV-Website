@@ -4,7 +4,7 @@ from .forms import VoiceForm
 
 def voice_list(request):
     try:
-        voices = list(StudentVoice.objects.filter(is_approved=True).prefetch_related('media').order_by('-created_at'))
+        voices = list(StudentVoice.objects.filter(is_approved=True).prefetch_related('media').order_by('order', '-created_at'))
     except Exception:
         voices = []
     

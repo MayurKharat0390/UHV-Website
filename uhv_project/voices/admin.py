@@ -7,7 +7,8 @@ class StoryMediaInline(admin.TabularInline):
 
 @admin.register(StudentVoice)
 class StudentVoiceAdmin(admin.ModelAdmin):
-    list_display = ('name_display', 'created_at', 'is_approved')
+    list_display = ('name_display', 'order', 'created_at', 'is_approved')
+    list_editable = ('order',)
     list_filter = ('is_approved', 'created_at')
     inlines = [StoryMediaInline]
     actions = ['approve_stories']
