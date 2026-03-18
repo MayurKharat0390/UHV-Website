@@ -15,7 +15,7 @@
         {% for activity in activities %}
         <a href="{% url 'activities:detail' activity.pk %}"
             class="group card-3d glass-strong rounded-[2rem] overflow-hidden shadow-glass hover:shadow-3d block">
-            <div class="relative h-64 overflow-hidden">
+            <div class="relative h-80 overflow-hidden">
                 {% if activity.image %}
                 <img src="{{ activity.image.url }}" alt="{{ activity.title }}"
                     class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
