@@ -1,12 +1,15 @@
+<div align="center">
+
 # 🏛️ Institute Universal Human Values Cell (UHV Cell)
 ### *A Digital Ecosystem for Holistic Human Excellence*
 
-![UHV Cell Banner](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
-[![Live Demo](https://img.shields.io/badge/Visit--Website-%F0%9F%8C%90-blue?style=for-the-badge)](https://uhv-website.vercel.app/)
-![Django 5.0](https://img.shields.io/badge/Built%20With-Django%205.0-092e20?style=for-the-badge&logo=django)
-![Academic Project](https://img.shields.io/badge/Category-Academic-blue?style=for-the-badge)
+[![Official UHV Platform](https://img.shields.io/badge/🌐_Visit_Live_Site-FF4B4B?style=for-the-badge&logoColor=white)](https://uhv-website.vercel.app/)
 
-The **Institute Universal Human Values (UHV) Cell** platform is a sophisticated, values-driven digital environment designed to nurture personal growth, ethical responsibility, and community harmony within the academic ecosystem. This platform serves as the central hub for student reflections, values-based activities, and holistic development tracking.
+![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
+![Django](https://img.shields.io/badge/Backend-Django_5.0-092e20?style=flat-square&logo=django)
+![License](https://img.shields.io/badge/Category-Institutional-blue?style=flat-square)
+
+</div>
 
 ---
 
