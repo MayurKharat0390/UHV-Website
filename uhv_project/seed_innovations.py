@@ -16,7 +16,8 @@ def seed_innovations():
             'innovation_type': 'app',
             'developed_by': 'Amit Sharma (CSE 3rd Year) & Dr. R. K. Singh',
             'link': 'https://harmonyhub.example.com',
-            'is_featured': True
+            'is_featured': True,
+            'thumbnail': 'innovations/thumbnails/wellness_hub.png'
         },
         {
             'title': 'UHV Impact Portal',
@@ -25,7 +26,8 @@ def seed_innovations():
             'innovation_type': 'website',
             'developed_by': 'Priya Das (IT) & Faculty Mentors',
             'link': 'https://impact.uhv.example.com',
-            'is_featured': True
+            'is_featured': True,
+            'thumbnail': 'innovations/thumbnails/shareplate.png'
         },
         {
             'title': 'Ethical Dilemma Simulator',
@@ -35,20 +37,34 @@ def seed_innovations():
             'developed_by': 'Siddharth Varma (Software Eng) & UHV Faculty',
             'link': 'https://ethics.sim.example.com',
             'is_featured': True
+        },
+        {
+            'title': 'LifeSync 2.0',
+            'short_description': 'Harmony and balance ecosystem for holistic human values integration.',
+            'description': 'LifeSync 2.0 is an advanced web portal designed to integrate core human values into modern daily life. It features mindfulness tools, relationship management scenarios, and personal value tracking.',
+            'innovation_type': 'website',
+            'developed_by': 'UHV Innovation Lab',
+            'link': 'https://life-sync2-0.vercel.app/',
+            'is_featured': True,
+            'thumbnail': 'innovations/thumbnails/lifesync_2_0.png'
         }
     ]
 
     for p in projects:
+        innovation_defaults = {
+            'short_description': p['short_description'],
+            'description': p['description'],
+            'innovation_type': p['innovation_type'],
+            'developed_by': p['developed_by'],
+            'link': p['link'],
+            'is_featured': p['is_featured']
+        }
+        if 'thumbnail' in p:
+            innovation_defaults['thumbnail'] = p['thumbnail']
+
         innovation, created = Innovation.objects.get_or_create(
             title=p['title'],
-            defaults={
-                'short_description': p['short_description'],
-                'description': p['description'],
-                'innovation_type': p['innovation_type'],
-                'developed_by': p['developed_by'],
-                'link': p['link'],
-                'is_featured': p['is_featured']
-            }
+            defaults=innovation_defaults
         )
         if created:
             print(f"Created: {p['title']}")
