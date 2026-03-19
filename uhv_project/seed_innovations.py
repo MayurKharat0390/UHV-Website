@@ -29,7 +29,7 @@ def seed_innovations():
             'description': 'SharePlate connects community members to share surplus food, fostering harmony and responsibility towards the environment and society.',
             'innovation_type': 'website',
             'developed_by': 'UHV Student Developers',
-            'link': 'https://sharingplate.onrender.com/',
+            'link': 'https://sharing-plate.vercel.app/',
             'is_featured': True,
             'thumbnail': 'innovations/thumbnails/shareplate.png'
         },
