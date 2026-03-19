@@ -8,68 +8,59 @@ django.setup()
 from innovations.models import Innovation
 
 def seed_innovations():
+    # Clear existing innovations to remove dummy data
+    print("🗑️ Clearing existing innovations...")
+    Innovation.objects.all().delete()
+
     projects = [
         {
-            'title': 'Harmony Hub Mobile App',
-            'short_description': 'A daily mindfulness and values-tracking app for students.',
-            'description': 'Harmony Hub is a comprehensive mobile application designed to help students integrate UHV principles into their daily lives. It features a mood tracker, values-based decision-making tool, and a community reflection board.',
-            'innovation_type': 'app',
-            'developed_by': 'Amit Sharma (CSE 3rd Year) & Dr. R. K. Singh',
-            'link': 'https://harmonyhub.example.com',
+            'title': 'LifeSync 2.0',
+            'short_description': 'Advanced Harmony and Life-Balance Ecosystem.',
+            'description': 'LifeSync 2.0 is an advanced platform designed to integrate core human values into modern daily life through mindfulness, relationship harmony, and value tracking.',
+            'innovation_type': 'website',
+            'developed_by': 'UHV Innovation Team',
+            'link': 'https://life-sync2-0.vercel.app/',
             'is_featured': True,
-            'thumbnail': 'innovations/thumbnails/wellness_hub.png'
+            'thumbnail': 'innovations/thumbnails/lifesync_2_0.png'
         },
         {
-            'title': 'UHV Impact Portal',
-            'short_description': 'A data-driven platform tracking UHV implementation across colleges.',
-            'description': 'A web portal that aggregates impact data from various institutions implementing UHV curricula. It provides visual insights into student well-being and campus culture improvements.',
+            'title': 'SharePlate',
+            'short_description': 'A community platform for food sharing and reducing waste.',
+            'description': 'SharePlate connects community members to share surplus food, fostering harmony and responsibility towards the environment and society.',
             'innovation_type': 'website',
-            'developed_by': 'Priya Das (IT) & Faculty Mentors',
-            'link': 'https://impact.uhv.example.com',
+            'developed_by': 'UHV Student Developers',
+            'link': 'https://sharingplate.onrender.com/',
             'is_featured': True,
             'thumbnail': 'innovations/thumbnails/shareplate.png'
         },
         {
-            'title': 'Ethical Dilemma Simulator',
-            'short_description': 'Interactive scenarios for practicing ethical decision-making.',
-            'description': 'A web-based tool where users can navigate complex ethical scenarios. Each choice is mapped to core human values, providing immediate feedback on the impact of decisions.',
+            'title': 'Wellness Hub',
+            'short_description': 'Mindfulness and values-based wellness for students.',
+            'description': 'Wellness Hub provides interactive tools for self-exploration, stress management, and tracking personal growth based on Universal Human Values.',
             'innovation_type': 'tool',
-            'developed_by': 'Siddharth Varma (Software Eng) & UHV Faculty',
-            'link': 'https://ethics.sim.example.com',
-            'is_featured': True
-        },
-        {
-            'title': 'LifeSync 2.0',
-            'short_description': 'Harmony and balance ecosystem for holistic human values integration.',
-            'description': 'LifeSync 2.0 is an advanced web portal designed to integrate core human values into modern daily life. It features mindfulness tools, relationship management scenarios, and personal value tracking.',
-            'innovation_type': 'website',
-            'developed_by': 'UHV Innovation Lab',
-            'link': 'https://life-sync2-0.vercel.app/',
+            'developed_by': 'UHV Wellness Cell',
+            'link': 'https://uhv.najrudin.com.np/',
             'is_featured': True,
-            'thumbnail': 'innovations/thumbnails/lifesync_2_0.png'
+            'thumbnail': 'innovations/thumbnails/wellness_hub.png'
         }
     ]
 
     for p in projects:
-        innovation_defaults = {
-            'short_description': p['short_description'],
-            'description': p['description'],
-            'innovation_type': p['innovation_type'],
-            'developed_by': p['developed_by'],
-            'link': p['link'],
-            'is_featured': p['is_featured']
-        }
-        if 'thumbnail' in p:
-            innovation_defaults['thumbnail'] = p['thumbnail']
-
-        innovation, created = Innovation.objects.get_or_create(
+        innovation, created = Innovation.objects.update_or_create(
             title=p['title'],
-            defaults=innovation_defaults
+            defaults={
+                'short_description': p['short_description'],
+                'description': p['description'],
+                'innovation_type': p['innovation_type'],
+                'developed_by': p['developed_by'],
+                'link': p['link'],
+                'is_featured': p['is_featured'],
+                'thumbnail': p['thumbnail']
+            }
         )
-        if created:
-            print(f"Created: {p['title']}")
-        else:
-            print(f"Already exists: {p['title']}")
+        print(f"✅ Seeding: {p['title']} ({'Created' if created else 'Updated'})")
+
+    print("\n🚀 All real innovations seeded successfully!")
 
 if __name__ == '__main__':
     seed_innovations()
