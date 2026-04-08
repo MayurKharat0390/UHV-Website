@@ -31,13 +31,13 @@ def home(request):
     # Hardcoded fallback values for Universal Human Values (4 Levels of Living)
     if not values:
         values = [
-            {'name': 'Harmony in Self', 'desc': 'Realizing the co-existence of the Self (I) and the Body, and ensuring right understanding and right feeling in the Self.', 'icon': '🧘', 
+            {'name': 'Harmony in Self', 'desc': 'Realizing the co-existence of the Self (I) and the Body, ensuring right understanding and feelings.', 'icon': '🧘', 'theme': 'primary',
              'examples': {'Knowing': 'Self-exploration.', 'Doing': 'Right behavior.', 'Being': 'Happiness.', 'Living': 'Health.'}},
-            {'name': 'Harmony in Family', 'desc': 'The basic unit of human interaction, where values like trust and respect are nurtured through right relationship.', 'icon': '🏡', 
-             'examples': {'Trust': 'Foundational value.', 'Respect': 'Right evaluation.', 'Affection': 'Feeling of kinship.', 'Gratitude': 'Honoring efforts.'}},
-            {'name': 'Harmony in Society', 'desc': 'Extending the feeling of relationship from family to the entire society, aiming for an undivided human race.', 'icon': '🤝', 
+            {'name': 'Harmony in Family', 'desc': 'The basic unit of human interaction, where values like trust and respect are nurtured through right relationship.', 'icon': '🏡', 'theme': 'accent',
+             'examples': {'Trust': 'Foundational value.', 'Respect': 'Right evaluation.', 'Affection': 'Kinship.', 'Gratitude': 'Honoring efforts.'}},
+            {'name': 'Harmony in Society', 'desc': 'Extending relationship from family to the entire society, aiming for an undivided human race.', 'icon': '🤝', 'theme': 'violet',
              'examples': {'Trust': 'Fearlessness.', 'Prosperity': 'Right production.', 'Co-existence': 'Universal system.', 'Work': 'Service.'}},
-            {'name': 'Harmony in Nature', 'desc': 'Living in harmony and co-existence with the animal world, plant world, and the material world.', 'icon': '🌱', 
+            {'name': 'Harmony in Nature', 'desc': 'Living in harmony and co-existence with the animal, plant, and material worlds.', 'icon': '🌱', 'theme': 'emerald',
              'examples': {'Restraint': 'Cyclic usage.', 'Nurture': 'Protection.', 'Balance': 'Ecological health.', 'Unity': 'Inseparable link.'}}
         ]
 
