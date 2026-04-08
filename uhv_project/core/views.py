@@ -75,8 +75,7 @@ def uhv_cell(request):
         {"sr": "", "role": "Faculty Representative", "name": "Ms. Vaishnavi Pujari", "dept": "Asst. Professor - Computer Science and Engineering (AIML)", "image": "images/team/vaishnavi_pujari.png"},
         {"sr": "", "role": "Faculty Representative", "name": "Ms Pratima Kalokhe", "dept": "Asst. Professor - Civil Engineering", "image": "images/team/pratima_kalokhe.png"},
         {"sr": 5, "role": "Staff Representative", "name": "Mr. Sanjeev Upendra Aboti", "dept": "Registrar - Office", "image": "images/team/sanjeev_aboti.png"},
-        {"sr": "", "role": "Staff Representative", "name": "Mr. Pratap Deokar", "dept": "Campus Incharge", "image": "images/team/pratap_deokar.png"},
-        {"sr": "", "role": "Staff Representative", "name": "Mr. Ganesh Borade", "dept": "Support – Hostel Warden"},
+        {"sr": "", "role": "Staff Representative", "name": "Mr. Ganesh Borade", "dept": "Campus Incharge"},
     ]
     
     return render(request, 'core/uhv_cell.html', {

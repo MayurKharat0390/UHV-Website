@@ -94,4 +94,4 @@ python manage.py runserver
 This project is an official initiative of the **Institute Universal Human Values Cell**. It is designed to be a model for educational institutions seeking to integrate character-building into the digital age.
 
 ---
-**Developed with ✨ & Intention for the UHV Department.**
+**Developed with ✨ & Intention for the UHV Cell.**

@@ -183,13 +183,13 @@ JAZZMIN_SETTINGS = {
     # Title on the login screen and main admin
     "site_title": "UHV Admin",
     "site_header": "Universal Human Values",
-    "site_brand": "UHV Department",
+    "site_brand": "UHV Cell",
     "site_logo": None,
     "login_logo": None,
     "welcome_sign": "Welcome to UHV Admin Dashboard",
     
     # Copyright on the footer
-    "copyright": "UHV Department",
+    "copyright": "UHV Cell",
     
     # The model admin to search from the search bar, search bar omitted if excluded
     "search_model": "users.CustomUser",

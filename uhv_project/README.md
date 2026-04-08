@@ -1,6 +1,6 @@
-# Universal Human Values (UHV) Department Platform
+# Universal Human Values (UHV) Cell Platform
 
-The official academic platform for the UHV Department, designed to cultivate ethical, responsible, and harmonious individuals.
+The official academic platform for the UHV Cell, designed to cultivate ethical, responsible, and harmonious individuals.
 
 ## Tech Stack
 - **Backend:** Django 5.x / 4.x
