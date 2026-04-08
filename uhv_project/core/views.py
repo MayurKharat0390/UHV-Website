@@ -28,17 +28,17 @@ def home(request):
         faculties = []
         values = []
 
-    # Hardcoded fallback values for Universal Human Values
+    # Hardcoded fallback values for Universal Human Values (4 Levels of Living)
     if not values:
         values = [
-            {'name': 'Responsibility', 'desc': 'Fulfilling one’s duty with care and dedication.', 'icon': '🤝', 
-             'examples': {'Family': 'Taking care of parents.', 'College': 'Submitting assignments.', 'Society': 'Following rules.', 'Profession': 'Deadlines.'}},
-            {'name': 'Trust', 'desc': 'Assurance in the intention of the other.', 'icon': '🌟', 
-             'examples': {'Family': 'Believing in siblings.', 'College': 'No plagiarism.', 'Society': 'Honesty.', 'Profession': 'Confidentiality.'}},
-            {'name': 'Respect', 'desc': 'Right evaluation of oneself and others.', 'icon': '💚', 
-             'examples': {'Family': 'Listening to elders.', 'College': 'Respecting peers.', 'Society': 'No discrimination.', 'Profession': 'Valuing time.'}},
-            {'name': 'Harmony', 'desc': 'Co-existence and mutual fulfillment.', 'icon': '🎯', 
-             'examples': {'Family': 'Quality time.', 'College': 'Group study.', 'Society': 'Community service.', 'Profession': 'Work-life balance.'}}
+            {'name': 'Harmony in Self', 'desc': 'Realizing the co-existence of the Self (I) and the Body, and ensuring right understanding and right feeling in the Self.', 'icon': '🧘', 
+             'examples': {'Knowing': 'Self-exploration.', 'Doing': 'Right behavior.', 'Being': 'Happiness.', 'Living': 'Health.'}},
+            {'name': 'Harmony in Family', 'desc': 'The basic unit of human interaction, where values like trust and respect are nurtured through right relationship.', 'icon': '🏡', 
+             'examples': {'Trust': 'Foundational value.', 'Respect': 'Right evaluation.', 'Affection': 'Feeling of kinship.', 'Gratitude': 'Honoring efforts.'}},
+            {'name': 'Harmony in Society', 'desc': 'Extending the feeling of relationship from family to the entire society, aiming for an undivided human race.', 'icon': '🤝', 
+             'examples': {'Trust': 'Fearlessness.', 'Prosperity': 'Right production.', 'Co-existence': 'Universal system.', 'Work': 'Service.'}},
+            {'name': 'Harmony in Nature', 'desc': 'Living in harmony and co-existence with the animal world, plant world, and the material world.', 'icon': '🌱', 
+             'examples': {'Restraint': 'Cyclic usage.', 'Nurture': 'Protection.', 'Balance': 'Ecological health.', 'Unity': 'Inseparable link.'}}
         ]
 
     return render(request, 'core/home.html', {
