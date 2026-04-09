@@ -11,10 +11,10 @@ def news_ticker(request):
     # Fallback to hardcoded updates if DB is empty or tables are missing
     if not updates:
         updates = [
+            {'text': 'MDP on Universal Human Values inaugurated at PCCoE (8th-10th April). 🏛️', 'icon_type': 'event'},
+            {'text': '78 delegates participating in the 3-day Value-Based Education program. 🤝', 'icon_type': 'update'},
+            {'text': 'Fostering Ethical Leadership and Holistic Growth through UHV. 🌟', 'icon_type': 'update'},
             {'text': 'Welcome to the PCCOE Institute UHV Cell! 🌟', 'icon_type': 'update'},
-            {'text': 'New Session on Universal Human Values starting soon. 🏛️', 'icon_type': 'event'},
-            {'text': 'Digital UHV Innovations now showcase student leadership. 💻', 'icon_type': 'update'},
-            {'text': 'Connect with our UHV Cell for holistic development. 🤝', 'icon_type': 'event'}
         ]
         
     return {
