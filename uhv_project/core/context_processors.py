@@ -11,10 +11,11 @@ def news_ticker(request):
     # Fallback to hardcoded updates if DB is empty or tables are missing
     if not updates:
         updates = [
-            {'text': 'MDP on Universal Human Values inaugurated at PCCoE (8th-10th April). 🏛️', 'icon_type': 'event'},
-            {'text': '78 delegates participating in the 3-day Value-Based Education program. 🤝', 'icon_type': 'update'},
-            {'text': 'Fostering Ethical Leadership and Holistic Growth through UHV. 🌟', 'icon_type': 'update'},
-            {'text': 'Welcome to the PCCOE Institute UHV Cell! 🌟', 'icon_type': 'update'},
+            {'text': 'MDP on Universal Human Values inaugurated at PCCoE (8th-10th April). Organized for senior leaders.', 'icon_type': 'event'},
+            {'text': '78 delegates (48 PCCoE, 31 from other institutions) participating in the 3-day MDP program.', 'icon_type': 'update'},
+            {'text': 'Dignitaries: Dr. Pramod Patil, Dr. Rajeev Nargundkar, & Dr. Govind Kulkarni graced the inauguration.', 'icon_type': 'update'},
+            {'text': 'AICTE UHV Cell: Dr. Umesh Jadhav (Resource Person), Dr. Anita Mane (Co-Facilitator), Ms. Kiran Naphade (Observer).', 'icon_type': 'update'},
+            {'text': 'MDP focuses on Right Understanding, Right Feelings, and Right Conduct for ethical leadership.', 'icon_type': 'update'},
         ]
         
     return {
