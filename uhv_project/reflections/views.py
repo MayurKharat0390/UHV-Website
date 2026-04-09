@@ -49,54 +49,55 @@ def daily_reflection(request):
 @require_POST
 def submit_reflection(request, scenario_id):
     from django.utils import timezone
-    from django.contrib import messages
-    
+    from django.db import OperationalError
+
     scenario = get_object_or_404(ReflectionScenario, pk=scenario_id)
     option_id = request.POST.get('option')
     option = get_object_or_404(ReflectionOption, pk=option_id)
-    
-    # Store response (anonymous if not logged in, or linked)
+
     user = request.user if request.user.is_authenticated else None
-    
-    # Check if user already submitted a reflection today
-    if user:
-        today = timezone.now().date()
-        already_reflected_today = UserResponse.objects.filter(
+
+    try:
+        # Check if user already submitted a reflection today
+        if user:
+            today = timezone.now().date()
+            already_reflected_today = UserResponse.objects.filter(
+                user=user,
+                created_at__date=today
+            ).exists()
+
+            if already_reflected_today:
+                return render(request, 'reflections/already_completed.html', {
+                    'scenario': scenario,
+                    'message': "You've already reflected today!"
+                })
+
+        # Save the response
+        UserResponse.objects.create(
             user=user,
-            created_at__date=today
-        ).exists()
-        
-        if already_reflected_today:
-            messages.warning(request, "You've already completed your reflection for today! Come back tomorrow. 🌟")
-            return render(request, 'reflections/already_completed.html', {
-                'scenario': scenario,
-                'message': "You've already reflected today!"
-            })
-    
-    # Create the response
-    UserResponse.objects.create(
-        user=user,
-        scenario=scenario,
-        selected_option=option
-    )
-    
-    # Update progress and streak for logged-in users
-    if user:
-        from progress.models import UserProgress, ReflectionStreak
-        
-        today = timezone.now().date()
-        
-        # Mark today's reflection as complete
-        ReflectionStreak.objects.update_or_create(
-            user=user,
-            date=today,
-            defaults={'reflection_completed': True}
+            scenario=scenario,
+            selected_option=option
         )
-        
-        # Update user progress
-        progress, created = UserProgress.objects.get_or_create(user=user)
-        progress.total_reflections = UserResponse.objects.filter(user=user).count()
-        progress.last_reflection_date = today
-        progress.save()
-    
+
+        # Update progress and streak for logged-in users
+        if user:
+            from progress.models import UserProgress, ReflectionStreak
+
+            today = timezone.now().date()
+
+            ReflectionStreak.objects.update_or_create(
+                user=user,
+                date=today,
+                defaults={'reflection_completed': True}
+            )
+
+            progress, created = UserProgress.objects.get_or_create(user=user)
+            progress.total_reflections = UserResponse.objects.filter(user=user).count()
+            progress.last_reflection_date = today
+            progress.save()
+
+    except OperationalError:
+        # Vercel / read-only SQLite environment — skip saving, still show feedback
+        pass
+
     return render(request, 'reflections/feedback.html', {'scenario': scenario, 'selected_option': option})
