@@ -63,7 +63,8 @@ class SiteVisitor(models.Model):
 
     @classmethod
     def get_total_count(cls):
-        return cls.objects.count()
+        from django.db.models import Sum
+        return cls.objects.aggregate(total=Sum('visit_count'))['total'] or 0
 
     def __str__(self):
         return f"{self.ip_address} - {self.last_visit}"
