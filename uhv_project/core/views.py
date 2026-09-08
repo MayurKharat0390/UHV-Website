@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.core.mail import send_mail
+from django.conf import settings
 from innovations.models import Innovation
 from faculty.models import FacultyProfile
 from .models import NewsUpdate, CoreValue
@@ -86,14 +88,38 @@ def uhv_cell(request):
 def contact(request):
     """
     View for the Contact Us page.
+    Saves the message to the database and sends an email notification.
     """
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            contact_message = form.save()
+
+            # Send email notification to UHV Cell
+            try:
+                send_mail(
+                    subject=f"[UHV Website] New Contact: {contact_message.subject}",
+                    message=(
+                        f"You have received a new contact form submission on the UHV Website.\n\n"
+                        f"-------------------------------------------\n"
+                        f"Name    : {contact_message.name}\n"
+                        f"Email   : {contact_message.email}\n"
+                        f"Subject : {contact_message.subject}\n"
+                        f"-------------------------------------------\n\n"
+                        f"Message:\n{contact_message.message}\n\n"
+                        f"-------------------------------------------\n"
+                        f"You can view all messages in the Admin panel."
+                    ),
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.CONTACT_RECIPIENT_EMAIL],
+                    fail_silently=True,  # Don't crash the page if email fails
+                )
+            except Exception:
+                pass  # Email sending is best-effort; the message is already saved to DB
+
             messages.success(request, "Thank you for reaching out! Your message has been sent successfully. 🌟")
             return render(request, 'core/contact_success.html')
     else:
         form = ContactForm()
-    
+
     return render(request, 'core/contact.html', {'form': form})
