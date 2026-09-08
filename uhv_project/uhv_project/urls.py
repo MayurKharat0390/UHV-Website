@@ -3,8 +3,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
+from django.http import HttpResponse
 
 urlpatterns = [
+    path('googlee5ff1cdad0d9acd2.html', lambda request: HttpResponse("google-site-verification: googlee5ff1cdad0d9acd2.html", content_type="text/html")),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
